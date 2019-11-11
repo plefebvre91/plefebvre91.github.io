@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Design on Pierre Lefebvre</title>
+    <link>https://example.org/categories/design/</link>
+    <description>Recent content in Design on Pierre Lefebvre</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 06 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.org/categories/design/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Design #3 - Drugswar</title>
+      <link>https://example.org/post/design-1-drugswar/</link>
+      <pubDate>Wed, 06 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.org/post/design-1-drugswar/</guid>
+      <description>L&amp;rsquo;idée est d&amp;rsquo;essayer de constituer un mini portfolio avec des designs (application ou site web). Il pourra s&amp;rsquo;agir soit du rajeunissement d&amp;rsquo;une ancienne interface graphique, soit d&amp;rsquo;une création personnelle. Tout ceci est réalisé à l&amp;rsquo;aide Gravit Designer.
+Pour le premier article j&amp;rsquo;ai choisi de rénover une partie de l&amp;rsquo;interface de Drugwars, un jeu de stratégie dans lequel on incarne un dealer dans les rues de New-York. A l&amp;rsquo;origine, le jeu était sorti sur DOS.</description>
+    </item>
+    
+    <item>
+      <title>Design #2 - un site web</title>
+      <link>https://example.org/post/design-2-site/</link>
+      <pubDate>Tue, 05 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.org/post/design-2-site/</guid>
+      <description>L&amp;rsquo;idée est d&amp;rsquo;essayer de constituer un mini portfolio avec des designs (application ou site web). Il pourra s&amp;rsquo;agir soit du rajeunissement d&amp;rsquo;une ancienne interface graphique, soit d&amp;rsquo;une création personnelle. Tout ceci est réalisé à l&amp;rsquo;aide Gravit Designer.
+Il s&amp;rsquo;agit ici d&amp;rsquo;une création personnelle d&amp;rsquo;un site permettant de présenter des clichés, agrémentés d&amp;rsquo;articles. Les photos ne sont soumises à aucun droit.</description>
+    </item>
+    
+    <item>
+      <title>Design #1 - compte bancaire</title>
+      <link>https://example.org/post/design-3-bank/</link>
+      <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.org/post/design-3-bank/</guid>
+      <description>L&amp;rsquo;idée est d&amp;rsquo;essayer de constituer un mini portfolio avec des designs (application ou site web). Il pourra s&amp;rsquo;agir soit du rajeunissement d&amp;rsquo;une ancienne interface graphique, soit d&amp;rsquo;une création personnelle. Tout ceci est réalisé à l&amp;rsquo;aide Gravit Designer.
+Il s&amp;rsquo;agit ici d&amp;rsquo;un tableau de bord de compte bancaire</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Developpement on Pierre Lefebvre</title>
+    <link>https://example.org/categories/developpement/</link>
+    <description>Recent content in Developpement on Pierre Lefebvre</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 03 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://example.org/categories/developpement/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>5 façons de coder un pixel</title>
+      <link>https://example.org/post/five-ways-to-code-a-pixel/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.org/post/five-ways-to-code-a-pixel/</guid>
+      <description>Pourquoi faire simple quand on peut faire compliqué ? Pour faire un article. Nous allons va voir ici au travers d&amp;rsquo;un exemple pourquoi le choix de la représentation d&amp;rsquo;une donnée, ici un pixel, peut influer sur les performances générales.
+On se propose ici de parcourir différentes représentation d&amp;rsquo;une donnée destinée à contenir les composantes d&amp;rsquo;une couleur au format RGBA (tout ceci est évidemment applicable à d&amp;rsquo;autres formats). Il existe plusieurs façons de coder une couleur, on choisira celle utilisant 4 entiers compris entre 0 et 255 pour chaque composante : rouge, vert, bleu, et transparence.</description>
+    </item>
+    
+  </channel>
+</rss>
