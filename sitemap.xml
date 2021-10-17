@@ -3,67 +3,77 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://example.org/categories/</loc>
+    <loc>http://plefebvre91.github.io/home/</loc>
+    <lastmod>2021-10-17T14:11:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://plefebvre91.github.io/</loc>
+    <lastmod>2021-10-17T14:11:03+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://plefebvre91.github.io/resources/</loc>
+    <lastmod>2021-10-17T11:29:52+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://plefebvre91.github.io/categories/</loc>
     <lastmod>2019-11-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/categories/design/</loc>
+    <loc>http://plefebvre91.github.io/categories/design/</loc>
     <lastmod>2019-11-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/tags/design/</loc>
+    <loc>http://plefebvre91.github.io/tags/design/</loc>
     <lastmod>2019-11-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/post/design-1-drugswar/</loc>
+    <loc>http://plefebvre91.github.io/post/design-1-drugswar/</loc>
     <lastmod>2019-11-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/</loc>
+    <loc>http://plefebvre91.github.io/post/</loc>
     <lastmod>2019-11-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/post/</loc>
+    <loc>http://plefebvre91.github.io/tags/</loc>
     <lastmod>2019-11-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/tags/</loc>
-    <lastmod>2019-11-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://example.org/post/design-2-site/</loc>
+    <loc>http://plefebvre91.github.io/post/design-2-site/</loc>
     <lastmod>2019-11-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/post/five-ways-to-code-a-pixel/</loc>
+    <loc>http://plefebvre91.github.io/post/five-ways-to-code-a-pixel/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/tags/c&#43;&#43;/</loc>
+    <loc>http://plefebvre91.github.io/tags/c&#43;&#43;/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/categories/developpement/</loc>
+    <loc>http://plefebvre91.github.io/categories/developpement/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/tags/developpement/</loc>
+    <loc>http://plefebvre91.github.io/tags/developpement/</loc>
     <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.org/post/design-3-bank/</loc>
+    <loc>http://plefebvre91.github.io/post/design-3-bank/</loc>
     <lastmod>2019-10-29T00:00:00+00:00</lastmod>
   </url>
   
