@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> [C&#43;&#43;] Mouvement de caméra SFML | Pierre Lefebvre</title>
+  <link rel = 'canonical' href = '/code/camera-shake/'>
+  <meta name="description" content="Ingénieur R&amp;D C&#43;&#43;, Abylsen (Nice).">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="[C&#43;&#43;] Mouvement de caméra SFML" />
+<meta property="og:description" content="Secousse de caméra avec SFML Dans cette présentation, Squirrel Eiserloh présente de façon générale comment ajouter des mouvements (translations fluides, secousses) à la caméra d&rsquo;une scène en deux ou trois dimensions. On se propose d&rsquo;appliquer cela sur un exemple de scène 2D écrite en C&#43;&#43; avec SFML : l&rsquo;appui sur Espace déclenche une explosion qui fait vaciller la caméra.
+Le résultat final ressemble à ceci (la qualité est un peu dégradée par le format GIF) :" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/code/camera-shake/" /><meta property="article:section" content="code" />
+<meta property="article:published_time" content="2022-03-10T14:44:50+01:00" />
+<meta property="article:modified_time" content="2022-03-10T14:44:50+01:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[C&#43;&#43;] Mouvement de caméra SFML"/>
+<meta name="twitter:description" content="Secousse de caméra avec SFML Dans cette présentation, Squirrel Eiserloh présente de façon générale comment ajouter des mouvements (translations fluides, secousses) à la caméra d&rsquo;une scène en deux ou trois dimensions. On se propose d&rsquo;appliquer cela sur un exemple de scène 2D écrite en C&#43;&#43; avec SFML : l&rsquo;appui sur Espace déclenche une explosion qui fait vaciller la caméra.
+Le résultat final ressemble à ceci (la qualité est un peu dégradée par le format GIF) :"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="/">
+  
+    <div id="logo" style="background-image: url(/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>Pierre Lefebvre</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Accueil</a></li>
+      
+        <li><a href="/resources">Ressources</a></li>
+      
+        <li><a href="/code">Code</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h1 id="secousse-de-caméra-avec-sfml">Secousse de caméra avec SFML</h1>
+<p>Dans cette <a href="https://www.youtube.com/watch?v=tu-Qe66AvtY">présentation</a>, Squirrel Eiserloh présente de façon générale comment ajouter des mouvements (translations fluides, secousses) à la caméra d&rsquo;une scène en deux ou trois dimensions. On se propose d&rsquo;appliquer cela sur un exemple de scène 2D écrite en C++ avec SFML : l&rsquo;appui sur <code>Espace</code> déclenche une explosion qui fait vaciller la caméra.</p>
+<p>Le résultat final ressemble à ceci (la qualité est un peu dégradée par le format GIF) :</p>
+<p><img src="https://github.com/plefebvre91//sfml-camera-shake/raw/main/screenshot.gif" alt="Screenshot"></p>
+<p>Le code final est disponible <a href="https://github.com/plefebvre91/sfml-camera-shake">ici</a>.</p>
+<h2 id="méthode">Méthode</h2>
+<p>On se concentre ici sur les éléments permettant d&rsquo;ajouter une secousse à la caméra. Les autres aspects (<em>sprite</em> animé, gestion de fenêtre SFML) ne seront pas abordés.</p>
+<p>Dans le cas de la SFML, il n&rsquo;y a pas d&rsquo;objet <em>caméra</em> à part entière et tout repose sur la gestion de la vue qu&rsquo;on pourra déplacer ou faire tourner.</p>
+<blockquote>
+<p>💡 <strong>Note</strong>: L&rsquo;inexistence de l&rsquo;entité <em>caméra</em> n&rsquo;est pas propre à SFML. Avec OpenGL (et DirectX de ce que j&rsquo;en connais) c&rsquo;est la combinaison des différentes matrices de projection qui permet de calculer la vue.</p>
+</blockquote>
+<p>L&rsquo;idée est d&rsquo;appliquer des transformations assez rapides à la vue (qu&rsquo;on appellera donc maintenant &ldquo;caméra&rdquo;) pour donner l&rsquo;impression d&rsquo;une secousse.</p>
+<h3 id="définition-dune-animation">Définition d&rsquo;une animation</h3>
+<p>Chaque secousse peut être paramétrée par une intensité (<code>trauma</code>), ainsi qu&rsquo;une durée (<code>max</code>). L&rsquo;intensité décroît au cours du temps, ce qui permet de revenir à un état normal et stable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">CameraAnimation</span> {
+</span></span><span style="display:flex;"><span>  sf<span style="color:#f92672">::</span>Time current;
+</span></span><span style="display:flex;"><span>  sf<span style="color:#f92672">::</span>Time max;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">float</span> trauma;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Le champ <code>current</code> servira à conserver l&rsquo;avancement temporel de l&rsquo;animation entre deux appels à la fonction de mise à jour de la caméra.</p>
+<h3 id="la-caméra">La caméra</h3>
+<p>La classe <code>Camera</code> propose les deux méthodes <code>shake()</code> et <code>update()</code> qui permettent respectivement d&rsquo;initier une secousse avec une intensité et une durée données, et de mettre à jour les propriétés de la caméra (rotation, translation) à chaque image.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Camera</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  Camera(sf<span style="color:#f92672">::</span>RenderWindow<span style="color:#f92672">*</span> window);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shake</span>(<span style="color:#66d9ef">float</span> trauma, <span style="color:#66d9ef">float</span> duration_ms);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(<span style="color:#66d9ef">float</span> dt);
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Comme dit plus haut, les actions portées sur la caméra sont en fait des actions portées sur la vue de la fenêtre. On a donc besoin d&rsquo;une instance de la fenêtre de rendu (passée au constructeur).</p>
+<h4 id="déclencher-la-secousse">Déclencher la secousse</h4>
+<p>La fonction <code>shake()</code> se contente de mettre à jour les paramètres souhaités pour la secousse en remplissant une structure (membre de la classe) de type <code>CameraAnimation</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> Camera<span style="color:#f92672">::</span>shake(<span style="color:#66d9ef">float</span> trauma, <span style="color:#66d9ef">float</span> duration_ms) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Set animation parameters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  _animation.max <span style="color:#f92672">=</span> sf<span style="color:#f92672">::</span>milliseconds(duration_ms);
+</span></span><span style="display:flex;"><span>  _animation.current <span style="color:#f92672">=</span> sf<span style="color:#f92672">::</span>seconds(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Trauma is inscreased each time this function is called: several calls increase shaking
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  _animation.trauma <span style="color:#f92672">+=</span> trauma;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Elle peut par exemple être appelée sur un évènement, ici ce sera l&rsquo;appui sur <code>Espace</code> qui déclenche une explosion.  À noter que l&rsquo;intensité de la secousse peut être augmentée à souhait en appelant plusieurs fois de suite la fonction.</p>
+<h4 id="mise-à-jour-de-la-vue">Mise à jour de la vue</h4>
+<p>La fonction <code>update()</code> est à appeler dans la boucle principale, en même temps que la mise à jour des différentes entités du jeu.</p>
+<p>Elle calcule d&rsquo;abord un angle et un <em>offset</em> de déplacement aléatoires, et dépendant de l&rsquo;intensité souhaitée.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// ... otherwise compute a random angle...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> angle <span style="color:#f92672">=</span> CAMERA_SHAKE_ANGLE <span style="color:#f92672">*</span> _animation.trauma <span style="color:#f92672">*</span> randn();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// ... and a random XY-offset...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>sf<span style="color:#f92672">::</span>Vector2f offset;
+</span></span><span style="display:flex;"><span>offset.x <span style="color:#f92672">=</span> CAMERA_SHAKE_OFFSET <span style="color:#f92672">*</span> _animation.trauma <span style="color:#f92672">*</span> randn();
+</span></span><span style="display:flex;"><span>offset.y <span style="color:#f92672">=</span> CAMERA_SHAKE_OFFSET <span style="color:#f92672">*</span> _animation.trauma <span style="color:#f92672">*</span> randn();
+</span></span></code></pre></div><blockquote>
+<p>💡 <strong>Note</strong>: <code>randn()</code> renvoie un nombre flottant entre -1 et 1</p>
+</blockquote>
+<p>Ensuite la transformation est appliquée à la caméra.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// ... and appply them to the view
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>_view.setRotation(angle);
+</span></span><span style="display:flex;"><span>_view.setCenter(_center<span style="color:#f92672">+</span>offset);
+</span></span><span style="display:flex;"><span>_window<span style="color:#f92672">-&gt;</span>setView(_view);
+</span></span></code></pre></div><blockquote>
+<p>💡 <strong>Note</strong>: le champ <code>_view</code> est initialisé avec <code>window-&gt;getView()</code></p>
+</blockquote>
+<p>Puis le champ <code>current</code> de l&rsquo;animation est mis à jour pour conserver l&rsquo;avancement, et enfin l&rsquo;intensité de la secousse est réduite de façon inversement proportionnelle au carré du temps écoulé.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// Update animation time
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>_animation.current <span style="color:#f92672">+=</span> sf<span style="color:#f92672">::</span>seconds(dt);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Decrease trauma parameter depending on time (squared)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">float</span> ratio <span style="color:#f92672">=</span> _animation.current.asSeconds() <span style="color:#f92672">/</span> _animation.max.asSeconds();
+</span></span><span style="display:flex;"><span>_animation.trauma <span style="color:#f92672">*=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> ratio<span style="color:#f92672">*</span>ratio;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="utilisation">Utilisation</h3>
+<p>L&rsquo;utilisation dans un programme SFML se fait de la façon suivante.</p>
+<h4 id="instanciation">Instanciation</h4>
+<p>La caméra est instanciée en utilisant la fenêtre de rendu.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>sf<span style="color:#f92672">::</span>RenderWindow window(sf<span style="color:#f92672">::</span>VideoMode(<span style="color:#ae81ff">800</span>, <span style="color:#ae81ff">460</span>), <span style="color:#e6db74">&#34;SFML window&#34;</span>);
+</span></span><span style="display:flex;"><span>Camera <span style="color:#a6e22e">camera</span>(<span style="color:#f92672">&amp;</span>window);
+</span></span></code></pre></div><h4 id="mise-à-jour">Mise à jour</h4>
+<p>La caméra est mise à jour à chaque tour de la boucle principale.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// Start the game loop
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">while</span> (window.isOpen())
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Process events...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  camera.update(dt.asSeconds());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Draw things...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="secousse">Secousse</h4>
+<p>Dans l&rsquo;exemple, la secousse se produit sur l&rsquo;appui sur la barre d&rsquo;espace.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (event.key.code <span style="color:#f92672">==</span> sf<span style="color:#f92672">::</span>Keyboard<span style="color:#f92672">::</span>Space)
+</span></span><span style="display:flex;"><span>  camera.shake(<span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">1200.0</span>);
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>On pourrait de la même façon ajouter d&rsquo;autres effets de tremblements, d&rsquo;oscillations lentes, de translations. Le code final est disponible <a href="https://github.com/plefebvre91/sfml-camera-shake">ici</a>.</p>
+<h2 id="ressources">Ressources</h2>
+<ul>
+<li>La <a href="https://www.youtube.com/watch?v=tu-Qe66AvtY">présentation</a> sur Youtube</li>
+<li>Le <a href="https://github.com/plefebvre91/sfml-camera-shake">dépôt</a> Git du code</li>
+</ul>
+
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  Pierre Lefebvre 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Accueil</a></li>
+         
+        <li><a href="/resources">Ressources</a></li>
+         
+        <li><a href="/code">Code</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+  <script
+    type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
