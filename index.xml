@@ -12,12 +12,56 @@
     
     
     <item>
+      <title>[CaML] Torus</title>
+      <link>/code/torus/</link>
+      <pubDate>Thu, 04 Nov 2021 17:25:07 +0100</pubDate>
+      
+      <guid>/code/torus/</guid>
+      <description>Tore Description Code Le code est ici : ici
+Résultat </description>
+    </item>
+    
+    <item>
+      <title>[CaML] Sphere</title>
+      <link>/code/sphere/</link>
+      <pubDate>Tue, 02 Nov 2021 17:27:43 +0100</pubDate>
+      
+      <guid>/code/sphere/</guid>
+      <description>Sphère Description La sphère est générée de façon récursive en partant d&amp;rsquo;un tétraèdre de base, auquel on repousse du centre (via une normalisation des vecteurs correspondants) les médianes des triangles de chacune de ses faces.
+Le paramètre passé à la fonction de dessin correspond au nombre d&amp;rsquo;explosions à réaliser sur le premier solide. Sur l&amp;rsquo;illustration il vaut 5.
+Code Le code est ici : lien vers le fichier
+Résultat </description>
+    </item>
+    
+    <item>
+      <title>[CaML] Triangle de Sierpinkski</title>
+      <link>/code/sierpinkski-triangle/</link>
+      <pubDate>Mon, 01 Nov 2021 17:24:51 +0100</pubDate>
+      
+      <guid>/code/sierpinkski-triangle/</guid>
+      <description>Triangle de Sierpinski Description C&amp;rsquo;est une fractale générée à partir d&amp;rsquo;un triangle de base, qu&amp;rsquo;on divise en 3 triangles ayant 2 à 2 un sommet en commun et correspondant aux milieux des côtés du premier triangle.
+Dans le code, les triangles de plus petite taille sont ajoutés récursivement aux triangles existants. Le paramètre passé à la fonction de dessin correspond au nombre de division à effectuer. Sur l&amp;rsquo;illustration il vaut 6.</description>
+    </item>
+    
+    <item>
+      <title>[CaML] Tapis de Sierpinski</title>
+      <link>/code/sierpinkski-carpet/</link>
+      <pubDate>Sun, 31 Oct 2021 17:24:55 +0100</pubDate>
+      
+      <guid>/code/sierpinkski-carpet/</guid>
+      <description>Tapis de Sierpinski Description C&amp;rsquo;est une fractale générée à partir d&amp;rsquo;un carré de base, autour duquel on ajoute 8 carrés disposés sur les bords d&amp;rsquo;une grille de 3x3.
+Dans le code, les carrés de plus petite taille sont ajoutés récursivement aux carrés existants. Le paramètre passé à la fonction de dessin correspond au nombre de division à effectuer. Sur l&amp;rsquo;illustration il vaut 4.
+Code Le code est ici
+Résultat </description>
+    </item>
+    
+    <item>
       <title>Ressources</title>
       <link>/resources/</link>
       <pubDate>Sun, 17 Oct 2021 11:29:52 +0200</pubDate>
       
       <guid>/resources/</guid>
-      <description>Ressources  Introduction à Git  Trucs pratiques Aliases pour Bash # Emacs alias emacs=&amp;#39;emacs -nw&amp;#39; # Git alias gd=&amp;#39;git diff&amp;#39; alias gl=&amp;#39;git log --decorate --graph --all --oneline -15&amp;#39; alias gll=&amp;#39;git log --decorate --graph --all --oneline&amp;#39; alias gs=&amp;#39;git status&amp;#39; # Unix commands alias l=&amp;#39;ls -CF&amp;#39; alias la=&amp;#39;ls -A&amp;#39; alias ll=&amp;#39;ls -alF&amp;#39; alias ls=&amp;#39;ls --color=auto&amp;#39; alias md=&amp;#39;mkdir&amp;#39; alias del=&amp;#39;rm *~ \#* 2&amp;amp;&amp;gt; /dev/null || true&amp;#39; alias grep=&amp;#39;grep --color&amp;#39; # Debug / profiling alias memreport=&amp;#39;ms_print&amp;#39; alias memusage=&amp;#39;valgrind --trace-children=yes --tool=massif&amp;#39; # Python alias virtenv=&amp;#39;python3 -m venv .</description>
+      <description>Ressources Cours  Introduction à Git  Trucs pratiques Aliases pour Bash # Emacs alias emacs=&amp;#39;emacs -nw&amp;#39; # Git alias gd=&amp;#39;git diff&amp;#39; alias gl=&amp;#39;git log --decorate --graph --all --oneline -15&amp;#39; alias gll=&amp;#39;git log --decorate --graph --all --oneline&amp;#39; alias gs=&amp;#39;git status&amp;#39; # Unix commands alias l=&amp;#39;ls -CF&amp;#39; alias la=&amp;#39;ls -A&amp;#39; alias ll=&amp;#39;ls -alF&amp;#39; alias ls=&amp;#39;ls --color=auto&amp;#39; alias md=&amp;#39;mkdir&amp;#39; alias del=&amp;#39;rm *~ \#* 2&amp;amp;&amp;gt; /dev/null || true&amp;#39; alias grep=&amp;#39;grep --color&amp;#39; # Debug / profiling alias memreport=&amp;#39;ms_print&amp;#39; alias memusage=&amp;#39;valgrind --trace-children=yes --tool=massif&amp;#39; # Python alias virtenv=&amp;#39;python3 -m venv .</description>
     </item>
     
     <item>
@@ -46,6 +90,16 @@
       <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/five-ways-to-code-a-pixel/</guid>
+      <description>Pourquoi faire simple quand on peut faire compliqué ? Pour faire un article. Nous allons va voir ici au travers d&amp;rsquo;un exemple pourquoi le choix de la représentation d&amp;rsquo;une donnée, ici un pixel, peut influer sur les performances générales.
+ On se propose ici de parcourir différentes représentation d&amp;rsquo;une donnée destinée à contenir les composantes d&amp;rsquo;une couleur au format RGBA (tout ceci est évidemment applicable à d&amp;rsquo;autres formats). Il existe plusieurs façons de coder une couleur, on choisira celle utilisant 4 entiers compris entre 0 et 255 pour chaque composante : rouge, vert, bleu, et transparence.</description>
+    </item>
+    
+    <item>
+      <title>[C&#43;&#43;] 5 façons de coder un pixel</title>
+      <link>/code/five-ways-to-code-a-pixel/</link>
+      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/code/five-ways-to-code-a-pixel/</guid>
       <description>Pourquoi faire simple quand on peut faire compliqué ? Pour faire un article. Nous allons va voir ici au travers d&amp;rsquo;un exemple pourquoi le choix de la représentation d&amp;rsquo;une donnée, ici un pixel, peut influer sur les performances générales.
  On se propose ici de parcourir différentes représentation d&amp;rsquo;une donnée destinée à contenir les composantes d&amp;rsquo;une couleur au format RGBA (tout ceci est évidemment applicable à d&amp;rsquo;autres formats). Il existe plusieurs façons de coder une couleur, on choisira celle utilisant 4 entiers compris entre 0 et 255 pour chaque composante : rouge, vert, bleu, et transparence.</description>
     </item>
