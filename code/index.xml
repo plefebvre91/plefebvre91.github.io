@@ -6,10 +6,22 @@
     <description>Recent content in Codes on Pierre Lefebvre</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
-    <lastBuildDate>Thu, 04 Nov 2021 17:25:07 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 05 Nov 2021 13:10:43 +0100</lastBuildDate>
     
 	<atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[CaML] Snake</title>
+      <link>/code/snake/</link>
+      <pubDate>Fri, 05 Nov 2021 13:10:43 +0100</pubDate>
+      
+      <guid>/code/snake/</guid>
+      <description>Snake Description Jeu de Snake classique. Le serpent avance vers le curseur de la souris (pas besoin de cliquer).
+⚠️ Ne pas placer la souris derrière la tête dans la direction opposée du serpent.
+Code Le code est ici
+Résultat </description>
+    </item>
     
     <item>
       <title>[CaML] Torus</title>
@@ -29,7 +41,7 @@ Résultat </description>
       <guid>/code/sphere/</guid>
       <description>Sphère Description La sphère est générée de façon récursive en partant d&amp;rsquo;un tétraèdre de base, auquel on repousse du centre (via une normalisation des vecteurs correspondants) les médianes des triangles de chacune de ses faces.
 Le paramètre passé à la fonction de dessin correspond au nombre d&amp;rsquo;explosions à réaliser sur le premier solide. Sur l&amp;rsquo;illustration il vaut 5.
-Code Le code est ici : lien vers le fichier
+Code Le code est ici
 Résultat </description>
     </item>
     
