@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>[CaML] Fractale de Vicsek</title>
+      <link>/code/vicsek/</link>
+      <pubDate>Sun, 07 Nov 2021 13:25:07 +0100</pubDate>
+      
+      <guid>/code/vicsek/</guid>
+      <description>Fractale de Vicsek Description  Le carré unité est décomposé en neuf sous-carreaux sur la grille régulière 3 par 3. Les carreaux dans les coins sont enlevés, les cinq autres restent. Ce procédé est récursivement répété pour les carreaux gardés. Wikipédia
+ Code Le code est ici : ici
+Résultat </description>
+    </item>
+    
+    <item>
       <title>[CaML] Snake</title>
       <link>/code/snake/</link>
       <pubDate>Fri, 05 Nov 2021 13:10:43 +0100</pubDate>
