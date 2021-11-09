@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>[CaML] Fractale de Von Koch</title>
+      <link>/code/von-koch/</link>
+      <pubDate>Tue, 09 Nov 2021 14:09:52 +0100</pubDate>
+      
+      <guid>/code/von-koch/</guid>
+      <description>Fractale de Von Koch Description Programme permettant de tracer la fractale de Von Koch.
+Code Le code est ici : ici
+Résultat </description>
+    </item>
+    
+    <item>
       <title>[CaML] Courbe polaire</title>
       <link>/code/polar/</link>
       <pubDate>Tue, 09 Nov 2021 12:36:14 +0100</pubDate>
