@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>[CaML] Courbe polaire</title>
+      <link>/code/polar/</link>
+      <pubDate>Tue, 09 Nov 2021 12:36:14 +0100</pubDate>
+      
+      <guid>/code/polar/</guid>
+      <description>Courbe polaire Description Programme permettant de tracer une courbe polaire à partir de son équation.
+Code Le code est ici : ici
+Résultat </description>
+    </item>
+    
+    <item>
       <title>[CaML] Fractale de Vicsek</title>
       <link>/code/vicsek/</link>
       <pubDate>Sun, 07 Nov 2021 13:25:07 +0100</pubDate>
