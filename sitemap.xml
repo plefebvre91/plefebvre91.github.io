@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/code/von-koch/</loc>
-    <lastmod>2021-11-09T14:09:52+01:00</lastmod>
+    <loc>/code/mesh/</loc>
+    <lastmod>2021-11-10T13:56:20+01:00</lastmod>
   </url>
   
   <url>
     <loc>/code/</loc>
+    <lastmod>2021-11-10T13:56:20+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/code/von-koch/</loc>
     <lastmod>2021-11-09T14:09:52+01:00</lastmod>
   </url>
   
@@ -90,11 +95,6 @@
   <url>
     <loc>/post/design-2-site/</loc>
     <lastmod>2019-11-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/five-ways-to-code-a-pixel/</loc>
-    <lastmod>2019-11-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>

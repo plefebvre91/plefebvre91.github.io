@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>[CaML] Maillage</title>
+      <link>/code/mesh/</link>
+      <pubDate>Wed, 10 Nov 2021 13:56:20 +0100</pubDate>
+      
+      <guid>/code/mesh/</guid>
+      <description>Maillage Description Programme permettant réaliser un maillage triangulaire d&amp;rsquo;une forme quelconque.
+Code Le code est ici : ici
+Résultat </description>
+    </item>
+    
+    <item>
       <title>[CaML] Fractale de Von Koch</title>
       <link>/code/von-koch/</link>
       <pubDate>Tue, 09 Nov 2021 14:09:52 +0100</pubDate>
@@ -127,16 +138,6 @@ Résultat </description>
       <guid>/post/design-2-site/</guid>
       <description>L&amp;rsquo;idée est d&amp;rsquo;essayer de constituer un mini portfolio avec des designs (application ou site web). Il pourra s&amp;rsquo;agir soit du rajeunissement d&amp;rsquo;une ancienne interface graphique, soit d&amp;rsquo;une création personnelle. Tout ceci est réalisé à l&amp;rsquo;aide Gravit Designer.
  Il s&amp;rsquo;agit ici d&amp;rsquo;une création personnelle d&amp;rsquo;un site permettant de présenter des clichés, agrémentés d&amp;rsquo;articles. Les photos ne sont soumises à aucun droit.</description>
-    </item>
-    
-    <item>
-      <title>5 façons de coder un pixel</title>
-      <link>/post/five-ways-to-code-a-pixel/</link>
-      <pubDate>Sun, 03 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/five-ways-to-code-a-pixel/</guid>
-      <description>Pourquoi faire simple quand on peut faire compliqué ? Pour faire un article. Nous allons va voir ici au travers d&amp;rsquo;un exemple pourquoi le choix de la représentation d&amp;rsquo;une donnée, ici un pixel, peut influer sur les performances générales.
- On se propose ici de parcourir différentes représentation d&amp;rsquo;une donnée destinée à contenir les composantes d&amp;rsquo;une couleur au format RGBA (tout ceci est évidemment applicable à d&amp;rsquo;autres formats). Il existe plusieurs façons de coder une couleur, on choisira celle utilisant 4 entiers compris entre 0 et 255 pour chaque composante : rouge, vert, bleu, et transparence.</description>
     </item>
     
     <item>
