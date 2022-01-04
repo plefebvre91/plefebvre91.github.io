@@ -6,11 +6,7 @@
     <description>Recent content in Codes on Pierre Lefebvre</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
-    <lastBuildDate>Wed, 10 Nov 2021 13:56:20 +0100</lastBuildDate>
-    
-	<atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 10 Nov 2021 13:56:20 +0100</lastBuildDate><atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[CaML] Maillage</title>
       <link>/code/mesh/</link>
@@ -84,7 +80,7 @@ Résultat </description>
       
       <guid>/code/sphere/</guid>
       <description>Sphère Description La sphère est générée de façon récursive en partant d&amp;rsquo;un tétraèdre de base, auquel on repousse du centre (via une normalisation des vecteurs correspondants) les médianes des triangles de chacune de ses faces.
-Le paramètre passé à la fonction de dessin correspond au nombre d&amp;rsquo;explosions à réaliser sur le premier solide. Sur l&amp;rsquo;illustration il vaut 5.
+Le paramètre passé à la fonction de dessin correspond au nombre d&#39;explosions à réaliser sur le premier solide. Sur l&amp;rsquo;illustration il vaut 5.
 Code Le code est ici
 Résultat </description>
     </item>
