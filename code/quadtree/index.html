@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> [C&#43;&#43;] Les quadtree pour les collisions 2D | Pierre Lefebvre</title>
+  <link rel = 'canonical' href = '/code/quadtree/'>
+  <meta name="description" content="Ingénieur de recherche, actuellement à l&#39;Université de Lorraine/LORIA (Nancy). ">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="[C&#43;&#43;] Les quadtree pour les collisions 2D" />
+<meta property="og:description" content="Les quadtrees pour les collisions en 2D On se propose d&rsquo;implémenter (C&#43;&#43; et SFML) une structure d&rsquo;arbre quaternaire (quadtree) pour détecter les collisions d&rsquo;un ensemble d&rsquo;objets.
+Le résultat final ressemble à ça:
+Le code de ce qui est décrit ici est disponible sur le dépôt demo-quadtree-collision.
+Contexte On considère un ensemble d&rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/code/quadtree/" /><meta property="article:section" content="code" />
+<meta property="article:published_time" content="2022-02-19T20:03:38+01:00" />
+<meta property="article:modified_time" content="2022-02-19T20:03:38+01:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[C&#43;&#43;] Les quadtree pour les collisions 2D"/>
+<meta name="twitter:description" content="Les quadtrees pour les collisions en 2D On se propose d&rsquo;implémenter (C&#43;&#43; et SFML) une structure d&rsquo;arbre quaternaire (quadtree) pour détecter les collisions d&rsquo;un ensemble d&rsquo;objets.
+Le résultat final ressemble à ça:
+Le code de ce qui est décrit ici est disponible sur le dépôt demo-quadtree-collision.
+Contexte On considère un ensemble d&rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="/">
+  
+    <div id="logo" style="background-image: url(/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>Pierre Lefebvre</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Accueil</a></li>
+      
+        <li><a href="/resources">Ressources</a></li>
+      
+        <li><a href="/code">Code</a></li>
+      
+        <li><a href="/post">Design</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h1 id="les-quadtrees-pour-les-collisions-en-2d">Les <em>quadtrees</em> pour les collisions en 2D</h1>
+<p>On se propose d&rsquo;implémenter (<em>C++</em> et <em>SFML</em>) une structure d&rsquo;arbre quaternaire (<em>quadtree</em>) pour détecter les collisions d&rsquo;un ensemble d&rsquo;objets.</p>
+<p>Le résultat final ressemble à ça:</p>
+<p><img src="https://github.com/plefebvre91/demo-quadtree-collision/raw/main/screenshot.png" alt="Screenshot"></p>
+<p>Le code de ce qui est décrit ici est disponible sur le dépôt <a href="https://github.com/plefebvre91/demo-quadtree-collision">demo-quadtree-collision</a>.</p>
+<h2 id="contexte">Contexte</h2>
+<p>On considère un ensemble d&rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets.</p>
+<h3 id="méthodes-naïves">Méthodes naïves</h3>
+<p>La méthode naïve qui vient à l&rsquo;esprit pour tester les collisions entre <em>N</em> objets consisterait à tester toutes les collisions possibles entre tous les objets pris deux à deux. Évidemment dans le cas d&rsquo;un nombre important d&rsquo;objets la complexité est d&rsquo;au moins <em>O(N²)</em> (au minimum <em>1 000 000</em> tests pour <em>N=1000</em>), à laquelle il faut rajouter l&rsquo;éventuelle complexité de la fonction qui teste les collisions. Cette méthode trouve donc rapidement ses limites.</p>
+<p>Pour limiter les calculs effectués, il est assez intuitif de penser qu&rsquo;on pourrait ne tester que les collisions entre des objets &ldquo;proches&rdquo;, qui appartiennent au même voisinage. Par exemple, si un objet se trouve sur la moitié droite de l&rsquo;écran, il serait judicieux de ne tester que les objets qui se trouvent également dans cette même moitié. Pour ça on pourrait maintenir une liste qui contient les objets triés de façon croissante selon leur abscisse, et reprendre l&rsquo;algorithme précédent en s&rsquo;arrêtant lorsque que l&rsquo;on dépasse la moitié de l&rsquo;écran. Si dans ce cas on économise les calculs de la fonction de collision sur un partie des objets, on en rajoute pour le tri, pour finalement avoir une complexité au pire des cas qui reste identique à celle de la méthode précédente.</p>
+<h3 id="arbres-quaternaires">Arbres quaternaires</h3>
+<p>Creusons un peu l&rsquo;idée de placer les objets dans une structure de données pour les sélectionner plus rapidement. Il faudrait que cette structure permette de placer et d&rsquo;accéder à chaque objet rapidement, et que la position de l&rsquo;objet dans la structure permettent de localiser l&rsquo;objet sur une région plus ou moins grande de l&rsquo;écran. On pourrait ainsi ne tester que les collisions intervenant entre les objets d&rsquo;une même région. Plus la région est petite, moins il y a d&rsquo;objets à l&rsquo;intérieur, et plus on économise en calcul.</p>
+<p>C&rsquo;est le but des arbres quaternaire. Il s&rsquo;agit d&rsquo;un arbre de recherche pour des données en deux dimensions (la position des objets), analogue aux arbres binaires de recherche pour les données en dimension 1 (les nombres). Là où pour les arbres binaires on sépare l&rsquo;intervalle de recherche en deux (&quot;<em>plus grand que</em>&quot;, &ldquo;<em>plus petit que</em>&quot;), on le divise en quatre pour les arbres quaternaires :</p>
+<ul>
+<li>en haut à droite,</li>
+<li>en haut à gauche,</li>
+<li>en bas à droite,</li>
+<li>en bas à gauche.</li>
+</ul>
+<p><img src="/img/quadtree.svg" alt="Quadtree"></p>
+<p>Concrètement, l&rsquo;écran complet représente la racine de l&rsquo;arbre (il contient tous les objets). À cette racine on relie quatre nœuds, correspondants chacun à un des quarts de l&rsquo;écran, auquels on associe les objets de son parent. Pour raffiner la zone de recherche, on peut rediviser récursivement chacun des nœuds en quatre autre nœuds correspondant chacun à un seizième de l&rsquo;écran, puis un soixante-quatrième d&rsquo;écran, et ainsi de suite. À chaque itération on construit cet arbre en y plaçant chaque objet dans le bon nœud selon sa position. Un fois fait, chaque feuille de l&rsquo;arbre constitue une région plus ou moins grande dans laquelle se trouve quelques uns de nos objets, en nombre bien inférieur au nombre total, nous donnant ainsi un ensemble d&rsquo;objets à tester pour les collisions.</p>
+<p>Pour l&rsquo;exemple qui suit, les objets sont des cercles, chaque déplacement se fait en ligne droite selon un vecteur vitesse initial aléatoire, et les déplacements sont bornés aux dimensions de la fenêtre. La fonction qui teste la collision entre deux objets et la distance euclidienne élevée au carré (pour éviter la racine) entre les centres des objets.</p>
+<h2 id="implémentation-dun-arbre-quaternaire">Implémentation d&rsquo;un arbre quaternaire</h2>
+<p>Dans la suite on propose une implémentation d&rsquo;un arbre quaternaire. Seules les fonctions importantes sont exposées ici, pour plus de détails voir <a href="https://github.com/plefebvre91/demo-quadtree-collision">le code complet</a>.</p>
+<h3 id="les-nœuds">Les nœuds</h3>
+<p>Les informations contenues dans un nœud sont les suivantes:</p>
+<ul>
+<li>une structure de données décrivant un rectangle pour définir la région de l&rsquo;écran associée au nœud (dans l&rsquo;exemple, la structure est basée sur la classe <a href="https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Rect.php"><code>sf::Rect</code></a> de la SFML);</li>
+<li>un tableau référençant (via un identifiant) les objets contenus dans le nœud;</li>
+<li>un drapeau indiquant si le nœud est une feuille (valeur par défaut) ou non.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">Node(<span style="color:#66d9ef">const</span> Rectangle<span style="color:#f92672">&amp;</span> r)<span style="color:#f92672">:</span>_area(r), _elements(), _leaf(true) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> node: _nodes)
+    node <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+}
+</code></pre></div><p>💡 <strong>Optimisation</strong>: Il est possible de réduire la quantité de données contenue dans un nœud, notamment pour économiser du cache de données, voir <a href="https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det?utm_source=pocket_mylist">le sujet sur Stackoverflow</a>.</p>
+<h3 id="les-méthodes">Les méthodes</h3>
+<h4 id="ajouter-un-élément-dans-larbre">Ajouter un élément dans l&rsquo;arbre</h4>
+<p>On peut diviser l&rsquo;insertion d&rsquo;un objet en deux cas :</p>
+<ul>
+<li>l&rsquo;insertion dans un nœud non terminal,</li>
+<li>l&rsquo;insertion dans un nœud terminal (une feuille).</li>
+</ul>
+<h5 id="choix-de-lenfant">Choix de l&rsquo;enfant</h5>
+<p>Pour le premier cas, en partant de la racine l&rsquo;objet doit descendre jusqu&rsquo;en bas de l&rsquo;arbre en sélectionnant à chaque fois le bon enfant selon sa position. Cette étape de sélection est réalisée par la méthode suivante:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> insertInSubnodes(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">*</span> entities, EntityId id) {
+  <span style="color:#75715e">// Get the object positions
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">const</span> Position<span style="color:#f92672">&amp;</span> position <span style="color:#f92672">=</span> entities[id].getPosition();
+
+  <span style="color:#75715e">// Search for the correct children for the node to be inserted
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> node: _nodes)
+    <span style="color:#66d9ef">if</span> (node<span style="color:#f92672">-&gt;</span>contains(position))
+      node<span style="color:#f92672">-&gt;</span>add(entities, id);
+}
+</code></pre></div><p>On teste selon la position de l&rsquo;objet dans lequel des 4 enfants on doit l&rsquo;insérer.</p>
+<h5 id="insertion-dans-un-nœud-intermédiaire">Insertion dans un nœud intermédiaire</h5>
+<p>Une fois l&rsquo;enfant sélectionné (ou si le nœud est terminal), on peut insérer l&rsquo;objet parmi les autres objets référencés par le nœud (tableau <code>_elements</code>).</p>
+<p>Si le nombre d&rsquo;objets dans un nœud devient trop grand, on raffine l&rsquo;arbre en créant de nouveaux enfants pour ce nœud (voir le paragraphe suivant), et on redistribue ses objets vers ses enfants.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> add(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">*</span> entities, EntityId id) {
+
+  <span style="color:#75715e">// If this is not a leaf, object should be inserted in the correct child
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (not _isLeaf)
+    insertInSubnodes<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(entities, id);
+
+  <span style="color:#75715e">// And if this node is a leaf, object is inserted
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">else</span> {
+    _elements.push_back(id);
+
+    <span style="color:#75715e">// If there is too much objects in the same node...
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (_elements.size() <span style="color:#f92672">&gt;=</span> MAX_ELEMENTS) {
+
+      <span style="color:#75715e">// ...the node is split in 4...
+</span><span style="color:#75715e"></span>      _split();
+
+      <span style="color:#75715e">// ...and its elements are re-dispatched in its children
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> id: _elements)
+        insertInSubnodes<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(entities, id);
+
+      _elements.clear();
+    }
+  }
+}
+</code></pre></div><h4 id="diviser-un-nœud-avec-split">Diviser un nœud avec <code>split()</code></h4>
+<p>La méthode <code>split()</code> permet de créer les quatres enfants d&rsquo;un nœuds en allouant la mémoire et en associant la zone de l&rsquo;écran correspondante à ces enfants. Les nouveaux nœuds créés sont des feuilles, tandis que leur parent redevient un nœud intermédiaire.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">_split</span>() {
+  <span style="color:#75715e">// Get the area coordinates
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> _area.left;
+  <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> _area.top;
+  <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> _area.width;
+  <span style="color:#66d9ef">int</span> height <span style="color:#f92672">=</span> _area.height;
+
+  <span style="color:#75715e">// Create children nodes
+</span><span style="color:#75715e"></span>  _nodes[NORTH_WEST] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(Rectangle(x, y, width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>));
+  _nodes[NORTH_EAST] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(Rectangle(x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, y, width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>));
+  _nodes[SOUTH_WEST] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(Rectangle(x, y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>));
+  _nodes[SOUTH_EAST] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(Rectangle(x <span style="color:#f92672">+</span> width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, y <span style="color:#f92672">+</span> height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>));
+
+  <span style="color:#75715e">// This node is no more a leaf
+</span><span style="color:#75715e"></span>  _isLeaf <span style="color:#f92672">=</span> false;
+}
+</code></pre></div><p>💡 <strong>Optimisation</strong>: N&rsquo;allouer que les enfants utiles.</p>
+<h4 id="nettoyage-de-larbre-clear">Nettoyage de l&rsquo;arbre <code>clear()</code></h4>
+<p>La suppression des nœuds se fait simplement par un parcours en profondeur de l&rsquo;arbre. On descend jusqu&rsquo;en bas et on libère chaque nœud en remontant. Lorsque tous les enfants d&rsquo;un nœud sont supprimés, ce nœud redevient une feuille.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">clear</span>() {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> node: _nodes)
+    <span style="color:#75715e">// Depth-first search for non-null nodes
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (node <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) {
+      node<span style="color:#f92672">-&gt;</span>clear();
+      <span style="color:#66d9ef">delete</span> node;
+    }
+
+  <span style="color:#75715e">// As this node does not have children anymore, it becomes a leaf
+</span><span style="color:#75715e"></span>  _leaf <span style="color:#f92672">=</span> true;
+}
+</code></pre></div><p>💡 <strong>Optimisation</strong>: Le cas où un nœud est libéré pour être immédiatement réalloué à l&rsquo;itération suivante se produit. On pourrait mettre plus d&rsquo;intelligence dans la méthode <code>clear()</code> pour éviter que cela se produise, voir <a href="https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det?utm_source=pocket_mylist">le sujet sur Stackoverflow</a>.</p>
+<h2 id="utilisation">Utilisation</h2>
+<p>Comme évoqué au début de l&rsquo;article, l&rsquo;utilisation de l&rsquo;arbre de fait de la manière suivante:</p>
+<ol>
+<li>Nettoyer l&rsquo;arbre;</li>
+<li>Mettre à jour la positions des objets;</li>
+<li>Ranger tous les objets dans l&rsquo;arbre;</li>
+<li>Récupérer les feuilles;</li>
+<li>Tester les collisions pour les objets à l&rsquo;intérieur de chaque feuille.</li>
+</ol>
+<p>Ces opérations sont répétées pour chaque image affichée. Les étapes <em>(1)</em> et <em>(3)</em> ont été abordées plus haut, l&rsquo;étape <em>(2)</em> est dépendante du programme écrit (ici, déplacement en ligne droite) et sera laissée de côté.</p>
+<h3 id="récupérer-les-feuilles">Récupérer les feuilles</h3>
+<p>Pour récupérer les feuilles on parcourt l&rsquo;arbre en profondeur, et on stocke les feuilles rencontrées au fur et à mesure:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">getLeaves</span>(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;*</span> out) {
+  <span style="color:#75715e">// If this node is a leaf, add it to the result...
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (_isLeaf)
+    out<span style="color:#f92672">-&gt;</span>push_back(<span style="color:#66d9ef">this</span>);
+
+  <span style="color:#75715e">// ...else scan its children
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> node: _nodes)
+    <span style="color:#66d9ef">if</span> (node <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)
+        node<span style="color:#f92672">-&gt;</span>getLeaves(out);
+}
+</code></pre></div><p>💡 <strong>Optimisation</strong>: Pour éviter les surcoûts liés à l&rsquo;utilisation de <code>std::vector&lt;T&gt;</code>, il est possible d&rsquo;utiliser un tableau à taille fixe puisque le nombre maximum d&rsquo;éléments contenus dans une feuille est connu.</p>
+<h3 id="tester-les-collisions">Tester les collisions</h3>
+<p>Les objets, de type <code>Entity</code>, sont contenus dans le tableau <code>_entities</code>. Ils disposent des méthodes <code>isColliding()</code> et <code>bounce()</code> qui ne seront pas détaillées ici, et qui permettent respectivement de détecter une collision et de rebondir en cas de collision.</p>
+<p>Les objets étant rangés dans l&rsquo;arbre selon leur position, il est maintenant possible de tester les collisions entre les objets à l&rsquo;intérieur des feuilles.</p>
+<p>Les méthode <code>isColliding()</code> et <code>bounce()</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> App<span style="color:#f92672">::</span>resolveCollisions() {
+
+  <span style="color:#75715e">// Retrieve all leaves from the quadtree
+</span><span style="color:#75715e"></span>  std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;</span> leaves;
+  _quadtree<span style="color:#f92672">-&gt;</span>getLeaves(<span style="color:#f92672">&amp;</span>leaves);
+
+  <span style="color:#75715e">// For each leaf...
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> leaf: leaves) {
+
+    <span style="color:#75715e">// ... get the associated objects
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> elements;
+    <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> nbEntities <span style="color:#f92672">=</span> leaf<span style="color:#f92672">-&gt;</span>getElements(<span style="color:#f92672">&amp;</span>elements);
+
+    <span style="color:#75715e">// Test collision between all objects in the leaf
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>nbEntities; i<span style="color:#f92672">++</span>) {
+      Entity<span style="color:#f92672">&amp;</span> e <span style="color:#f92672">=</span> _entities[elements[i]];
+
+      <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; j<span style="color:#f92672">&lt;</span>nbEntities; j<span style="color:#f92672">++</span>) {
+        Entity<span style="color:#f92672">&amp;</span> f <span style="color:#f92672">=</span> _entities[elements[j]];
+
+        <span style="color:#66d9ef">if</span> (e.isColliding(f)) {
+          e.bounce(f);
+          f.bounce(e);
+        }
+      }
+    }
+  }
+}
+</code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>L&rsquo;implémentation d&rsquo;arbres quaternaires requiert un effort d&rsquo;implémentation mais permet de réduire considérablement la quantité de calculs effectuées dans le cas de la détection de collisions. L&rsquo;aspect complexité algorithmique liée aux arbres quaternaires ne sera pas abordée ici, d&rsquo;autres articles plus poussés existent sur le sujet.</p>
+<p><img src="/img/quadtree-final.png" alt="Quadtree"></p>
+<h2 id="autres-ressources">Autres ressources</h2>
+<ul>
+<li><a href="https://github.com/plefebvre91/demo-quadtree-collision">Le code associé</a></li>
+<li><a href="https://www.gamedev.net/tutorials/_/technical/graphics-programming-and-theory/quadtrees-r1303/">L&rsquo;article &ldquo;Quadtrees&rdquo; sur gamedev.net</a></li>
+<li><a href="https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det?utm_source=pocket_mylist">Stackoverflow</a></li>
+<li><a href="https://www.youtube.com/results?search_query=quadtree+collision+sfml">Autres exemples sur youtube</a></li>
+</ul>
+
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Pierre Lefebvre 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Accueil</a></li>
+         
+        <li><a href="/resources">Ressources</a></li>
+         
+        <li><a href="/code">Code</a></li>
+         
+        <li><a href="/post">Design</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>

@@ -6,7 +6,19 @@
     <description>Recent content in Codes on Pierre Lefebvre</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
-    <lastBuildDate>Thu, 10 Feb 2022 14:00:20 +0100</lastBuildDate><atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Feb 2022 20:03:38 +0100</lastBuildDate><atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[C&#43;&#43;] Les quadtree pour les collisions 2D</title>
+      <link>/code/quadtree/</link>
+      <pubDate>Sat, 19 Feb 2022 20:03:38 +0100</pubDate>
+      
+      <guid>/code/quadtree/</guid>
+      <description>Les quadtrees pour les collisions en 2D On se propose d&amp;rsquo;implémenter (C++ et SFML) une structure d&amp;rsquo;arbre quaternaire (quadtree) pour détecter les collisions d&amp;rsquo;un ensemble d&amp;rsquo;objets.
+Le résultat final ressemble à ça:
+Le code de ce qui est décrit ici est disponible sur le dépôt demo-quadtree-collision.
+Contexte On considère un ensemble d&amp;rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets.</description>
+    </item>
+    
     <item>
       <title>[C&#43;&#43;] Volley</title>
       <link>/code/volley/</link>
