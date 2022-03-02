@@ -13,9 +13,9 @@
       <pubDate>Tue, 01 Mar 2022 20:43:14 +0100</pubDate>
       
       <guid>/code/ecg/</guid>
-      <description>Dessiner un électrocardiogramme avec un shader On se propose de dessiner une courbe d&amp;rsquo;électrocardiogramme avec un shader (GLSL). Il s&amp;rsquo;agit d&amp;rsquo;une répresentation approximative, le but est n&amp;rsquo;est pas de simuler quoique ce soit mais juste de manipuler un shader.
+      <description>Dessiner un électrocardiogramme avec un shader On se propose de dessiner une courbe d&amp;rsquo;électrocardiogramme avec un shader (GLSL). Il s&amp;rsquo;agit d&amp;rsquo;une répresentation approximative, le but n&amp;rsquo;est pas de simuler quoique ce soit mais juste de manipuler un shader.
 Le code complet est disponible sur le dépôt et le résultat final ressemble à ça (la qualité est un peu dégradée par le format GIF):
-Méthode Avec un langage plus classique, pour dessiner ce genre de courbe la méthode suivie aurait probablement d&amp;rsquo;implémenter un application de type : $$f_t : \mathbb{R} \rightarrow \mathbb{R}$$</description>
+Méthode Avec un langage plus classique, pour dessiner ce genre de courbe la méthode suivie aurait probablement d&amp;rsquo;implémenter une application de type : $$f_t : \mathbb{R} \rightarrow \mathbb{R}$$</description>
     </item>
     
     <item>
