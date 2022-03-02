@@ -6,7 +6,18 @@
     <description>Recent content on Pierre Lefebvre</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
-    <lastBuildDate>Fri, 25 Feb 2022 13:12:20 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Mar 2022 20:43:14 +0100</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[GLSL] Électrocardiogramme</title>
+      <link>/code/ecg/</link>
+      <pubDate>Tue, 01 Mar 2022 20:43:14 +0100</pubDate>
+      
+      <guid>/code/ecg/</guid>
+      <description>Dessiner un électrocardiogramme avec un shader On se propose de dessiner une courbe d&amp;rsquo;électrocardiogramme avec un shader (GLSL). Il s&amp;rsquo;agit d&amp;rsquo;une répresentation approximative, le but est n&amp;rsquo;est pas de simuler quoique ce soit mais juste de manipuler un shader.
+Le code complet est disponible sur le dépôt et le résultat final ressemble à ça (la qualité est un peu dégradée par le format GIF):
+Méthode Avec un langage plus classique, pour dessiner ce genre de courbe la méthode suivie aurait probablement d&amp;rsquo;implémenter un application de type : $$f_t : \mathbb{R} \rightarrow \mathbb{R}$$</description>
+    </item>
+    
     <item>
       <title>[Godot] Premier jeu</title>
       <link>/code/basket/</link>
@@ -112,7 +123,7 @@ Résultat </description>
       
       <guid>/code/sphere/</guid>
       <description>Sphère Description La sphère est générée de façon récursive en partant d&amp;rsquo;un tétraèdre de base, auquel on repousse du centre (via une normalisation des vecteurs correspondants) les médianes des triangles de chacune de ses faces.
-Le paramètre passé à la fonction de dessin correspond au nombre d&#39;explosions à réaliser sur le premier solide. Sur l&amp;rsquo;illustration il vaut 5.
+Le paramètre passé à la fonction de dessin correspond au nombre d&amp;rsquo;explosions à réaliser sur le premier solide. Sur l&amp;rsquo;illustration il vaut 5.
 Code Le code est ici
 Résultat </description>
     </item>
@@ -146,7 +157,7 @@ Résultat </description>
       
       <guid>/resources/</guid>
       <description>Ressources Les sources LateX sont présentes sur le dépôt.
-Cours  [PDF] Introduction à Git  Autres  [PDF] Cache et alignement [PDF] Pipeline d&amp;rsquo;instructions [PDF] Arbre quaternaire  Trucs pratiques Aliases pour Bash # Emacs alias emacs=&amp;#39;emacs -nw&amp;#39; # Git alias gd=&amp;#39;git diff&amp;#39; alias gl=&amp;#39;git log --decorate --graph --all --oneline -15&amp;#39; alias gll=&amp;#39;git log --decorate --graph --all --oneline&amp;#39; alias gs=&amp;#39;git status&amp;#39; # Unix commands alias l=&amp;#39;ls -CF&amp;#39; alias la=&amp;#39;ls -A&amp;#39; alias ll=&amp;#39;ls -alF&amp;#39; alias ls=&amp;#39;ls --color=auto&amp;#39; alias md=&amp;#39;mkdir&amp;#39; alias del=&amp;#39;rm *~ \#* 2&amp;amp;&amp;gt; /dev/null || true&amp;#39; alias grep=&amp;#39;grep --color&amp;#39; # Debug / profiling alias memreport=&amp;#39;ms_print&amp;#39; alias memusage=&amp;#39;valgrind --trace-children=yes --tool=massif&amp;#39; # Python alias virtenv=&amp;#39;python3 -m venv .</description>
+Cours  [PDF] Introduction à Git  Autres  [PDF] Cache et alignement [PDF] Pipeline d&amp;rsquo;instructions [PDF] Arbre quaternaire  Trucs pratiques Aliases pour Bash # Emacs alias emacs=&amp;#39;emacs -nw&amp;#39;  # Git alias gd=&amp;#39;git diff&amp;#39; alias gl=&amp;#39;git log --decorate --graph --all --oneline -15&amp;#39; alias gll=&amp;#39;git log --decorate --graph --all --oneline&amp;#39; alias gs=&amp;#39;git status&amp;#39;  # Unix commands alias l=&amp;#39;ls -CF&amp;#39; alias la=&amp;#39;ls -A&amp;#39; alias ll=&amp;#39;ls -alF&amp;#39; alias ls=&amp;#39;ls --color=auto&amp;#39; alias md=&amp;#39;mkdir&amp;#39; alias del=&amp;#39;rm *~ \#* 2&amp;amp;&amp;gt; /dev/null || true&amp;#39; alias grep=&amp;#39;grep --color&amp;#39;  # Debug / profiling alias memreport=&amp;#39;ms_print&amp;#39; alias memusage=&amp;#39;valgrind --trace-children=yes --tool=massif&amp;#39;  # Python alias virtenv=&amp;#39;python3 -m venv .</description>
     </item>
     
     <item>

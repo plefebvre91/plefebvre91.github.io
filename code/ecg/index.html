@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> [GLSL] Électrocardiogramme | Pierre Lefebvre</title>
+  <link rel = 'canonical' href = '/code/ecg/'>
+  <meta name="description" content="Ingénieur de recherche, actuellement à l&#39;Université de Lorraine/LORIA (Nancy). ">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="[GLSL] Électrocardiogramme" />
+<meta property="og:description" content="Dessiner un électrocardiogramme avec un shader On se propose de dessiner une courbe d&rsquo;électrocardiogramme avec un shader (GLSL). Il s&rsquo;agit d&rsquo;une répresentation approximative, le but est n&rsquo;est pas de simuler quoique ce soit mais juste de manipuler un shader.
+Le code complet est disponible sur le dépôt et le résultat final ressemble à ça (la qualité est un peu dégradée par le format GIF):
+Méthode Avec un langage plus classique, pour dessiner ce genre de courbe la méthode suivie aurait probablement d&rsquo;implémenter un application de type : $$f_t : \mathbb{R} \rightarrow \mathbb{R}$$" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/code/ecg/" /><meta property="article:section" content="code" />
+<meta property="article:published_time" content="2022-03-01T20:43:14+01:00" />
+<meta property="article:modified_time" content="2022-03-01T20:43:14+01:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[GLSL] Électrocardiogramme"/>
+<meta name="twitter:description" content="Dessiner un électrocardiogramme avec un shader On se propose de dessiner une courbe d&rsquo;électrocardiogramme avec un shader (GLSL). Il s&rsquo;agit d&rsquo;une répresentation approximative, le but est n&rsquo;est pas de simuler quoique ce soit mais juste de manipuler un shader.
+Le code complet est disponible sur le dépôt et le résultat final ressemble à ça (la qualité est un peu dégradée par le format GIF):
+Méthode Avec un langage plus classique, pour dessiner ce genre de courbe la méthode suivie aurait probablement d&rsquo;implémenter un application de type : $$f_t : \mathbb{R} \rightarrow \mathbb{R}$$"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="/">
+  
+    <div id="logo" style="background-image: url(/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>Pierre Lefebvre</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Accueil</a></li>
+      
+        <li><a href="/resources">Ressources</a></li>
+      
+        <li><a href="/code">Code</a></li>
+      
+        <li><a href="/post">Design</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h1 id="dessiner-un-électrocardiogramme-avec-un-shader">Dessiner un électrocardiogramme avec un <em>shader</em></h1>
+<p>On se propose de dessiner une courbe d&rsquo;électrocardiogramme avec un <em>shader</em> (GLSL). Il s&rsquo;agit d&rsquo;une répresentation approximative, le but est n&rsquo;est pas de simuler quoique ce soit mais juste de manipuler un <em>shader</em>.</p>
+<p>Le code complet est disponible <a href="https://github.com/plefebvre91/Graphics/blob/master/ecg/ecg.frag">sur le dépôt</a> et le résultat final ressemble à ça (la qualité est un peu dégradée par le format GIF):</p>
+<p><img src="/resources/ecg.gif" alt="Screenshot"></p>
+<h2 id="méthode">Méthode</h2>
+<p>Avec un langage plus classique, pour dessiner ce genre de courbe la méthode suivie aurait probablement d&rsquo;implémenter un application de type : $$f_t : \mathbb{R} \rightarrow \mathbb{R}$$</p>
+<p>Pour chacunes des abscisses, on aurait calulé l&rsquo;ordonnée correspondante (en prenant en compte la dimension temporelle pour le mouvement), et relier les points. Avec un <em>fragment shader</em> c&rsquo;est un peu différent. Le <em>shader</em> étant calculé pour chacun des pixels issus de l&rsquo;interpolation (<em>rasterization</em>) des primitives (voir le <a href="https://vulkan-tutorial.com/fr/Dessiner_un_triangle/Pipeline_graphique_basique/Introduction">pipeline de rendu</a>) la méthode &ldquo;classique&rdquo; n&rsquo;est pas applicable. Dans notre cas, le <em>shader</em> est calulé pour chacun des pixel de l&rsquo;image. Il s&rsquo;agit donc d&rsquo;obtenir une courbe depuis une fonction de type :
+$$f_t : \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}$$</p>
+<p>La méthode choisie ici est la suivante : à chaque point du plan (chaque pixel), on associe une couleur qui est fonction de sa distance à la courbe qu&rsquo;on souhaite générer. En pratique les étapes sont:</p>
+<ol>
+<li>créer le signal représenté à l&rsquo;aide de fonctions mathématiques,</li>
+<li>sélectionner la partie de la courbe qui nous intéresse,</li>
+<li>calculer la couleur du pixel en fonction de sa distance à la courbe,</li>
+<li>appliquer un filtre pour l&rsquo;aspect &ldquo;écran analogique&rdquo;.</li>
+</ol>
+<h3 id="la-fonction-utilisée">La fonction utilisée</h3>
+<p>On utilise une somme de sinusoïdes auquelles on associe diffénts paramètres pour faire varier leurs aspects et la vitesse de leur mouvement. Le détails des fonctions utilisées n&rsquo;a que peu d&rsquo;importance. D&rsquo;autres fonctions pourraient être utilisées pour un aspect plus proche de la réalité.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#75715e">// Curve parameters</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> frequence <span style="color:#f92672">=</span> <span style="color:#ae81ff">60.0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> phase <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3.0</span><span style="color:#f92672">*</span>iTime;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Signal function</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">vec2</span> signal <span style="color:#f92672">=</span> <span style="color:#66d9ef">vec2</span>(<span style="color:#ae81ff">0.0</span>, <span style="color:#ae81ff">0.0</span>);
+</span></span><span style="display:flex;"><span>signal.x <span style="color:#f92672">=</span> uv.x;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 2 sinusoids</span>
+</span></span><span style="display:flex;"><span>signal.y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>(<span style="color:#ae81ff">0.07</span><span style="color:#f92672">*</span>(sin(frequence<span style="color:#f92672">*</span>signal.x<span style="color:#f92672">+</span>phase)))
+</span></span><span style="display:flex;"><span>	 <span style="color:#f92672">+</span> abs(<span style="color:#ae81ff">0.4</span><span style="color:#f92672">*</span>(sin(frequence<span style="color:#f92672">/</span><span style="color:#ae81ff">5.0</span><span style="color:#f92672">*</span>signal.x<span style="color:#f92672">+</span>phase)));
+</span></span></code></pre></div><p>Les coefficients du vecteur <code>signal</code> sont:</p>
+<ul>
+<li>l&rsquo;abscisse du point en cours de traitement (ramenée entre 0 et 1), et en</li>
+<li>la valeur du signal associée à cette abscisse.</li>
+</ul>
+<h3 id="sélection-de-la-zone-dintéret">Sélection de la zone d&rsquo;intéret</h3>
+<p>La fonction choisie est périodique mais on souhaite n&rsquo;avoir qu&rsquo;une seule impulsion (le but étant que cela ressemble à un ECG). Pour cela on aplatit les bords de la courbe.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#66d9ef">vec2</span> clip(<span style="color:#66d9ef">in</span> <span style="color:#66d9ef">vec2</span> value, <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">float</span> minimum, <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">float</span> maximum) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">vec2</span> result <span style="color:#f92672">=</span> value;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  result.y <span style="color:#f92672">*=</span> smoothstep(minimum,<span style="color:#ae81ff">0.5</span>, value.x);
+</span></span><span style="display:flex;"><span>  result.y <span style="color:#f92672">*=</span> <span style="color:#ae81ff">1.0</span> <span style="color:#f92672">-</span> smoothstep(<span style="color:#ae81ff">0.5</span>,maximum, value.x);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>La fonction <code>clip()</code> ne conserve que les valeurs comprises entre <code>minimum</code> et <code>maximum</code>. <a href="https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/smoothstep.xhtml"><code>smoothstep()</code></a>` permet d&rsquo;amortir la liaison entre les différentes parties de la courbe.</p>
+<h3 id="attribution-de-la-couleur">Attribution de la couleur</h3>
+<p>On colorie les points suffisamment proches (selon <code>THICKNESS</code>) de la courbe, le reste restant noir.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#75715e">// Fragment value is the distance between the fragment and the signal</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (distance(uv, signal) <span style="color:#f92672">&lt;</span> THICKNESS)
+</span></span><span style="display:flex;"><span>  color <span style="color:#f92672">=</span> blue<span style="color:#f92672">*</span>intensity.y;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>  color <span style="color:#f92672">=</span> black;
+</span></span></code></pre></div><p>L&rsquo;intensité (la luminosité) est fonction de l&rsquo;abscisse : faible aux extrémités, forte au centre.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#75715e">// Intensity decreases at the borders</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">vec2</span> intensity <span style="color:#f92672">=</span> <span style="color:#66d9ef">vec2</span>(uv.x, max(<span style="color:#ae81ff">1.0</span><span style="color:#f92672">/</span>abs(<span style="color:#ae81ff">0.5</span><span style="color:#f92672">-</span>uv.x), <span style="color:#ae81ff">1.0</span>));
+</span></span><span style="display:flex;"><span>intensity <span style="color:#f92672">=</span> clip(intensity, <span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">0.99</span>);
+</span></span></code></pre></div><p>La fonction <code>clip()</code> est à nouveau utilisée ici pour éteindre les extrémités en douceur.</p>
+<h3 id="aspect-viel-écran">Aspect viel écran</h3>
+<p>On simule l&rsquo;effet lignes de balayage avec l&rsquo;application d&rsquo;une sinusoïde de haute fréquence sur l&rsquo;ensemble de la zone :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-glsl" data-lang="glsl"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> analogic_screen_filter(<span style="color:#66d9ef">inout</span> <span style="color:#66d9ef">vec3</span> color, <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">vec2</span> frag) {
+</span></span><span style="display:flex;"><span>  color <span style="color:#f92672">*=</span> sin(<span style="color:#ae81ff">1200.0</span><span style="color:#f92672">*</span>frag.y);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>Le code complet est disponible <a href="https://github.com/plefebvre91/Graphics/blob/master/ecg/ecg.frag">ici</a>, et est executable sur le site <a href="https://www.shadertoy.com/">Shader Toy</a>.</p>
+<h2 id="ressources">Ressources</h2>
+<ul>
+<li><a href="https://vulkan-tutorial.com/fr/Dessiner_un_triangle/Pipeline_graphique_basique/Introduction">Pipeline de rendu OpenGL</a></li>
+<li>Le site <a href="https://www.shadertoy.com/">Shader Toy</a></li>
+<li><a href="https://www.shadertoy.com/view/XsyGRw">Un autre exemple</a></li>
+</ul>
+
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Pierre Lefebvre 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Accueil</a></li>
+         
+        <li><a href="/resources">Ressources</a></li>
+         
+        <li><a href="/code">Code</a></li>
+         
+        <li><a href="/post">Design</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
