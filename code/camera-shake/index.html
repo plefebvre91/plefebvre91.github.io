@@ -111,7 +111,7 @@ Le résultat final ressemble à ceci (la qualité est un peu dégradée par le f
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>Le champ <code>current</code> servira à conserver l&rsquo;avancement temporel de l&rsquo;animation entre deux appels à la fonction de mise à jour de la caméra.</p>
 <h3 id="la-caméra">La caméra</h3>
-<p>La classe <code>Camera</code> propose les deux méthodes <code>shake()</code> et <code>update()</code> qui permettent respectivement d&rsquo;initier une secousse avec une intensité et une durée donnée, et de mettre à jour les propriétés de la caméra (rotation, translation) à chaque image.</p>
+<p>La classe <code>Camera</code> propose les deux méthodes <code>shake()</code> et <code>update()</code> qui permettent respectivement d&rsquo;initier une secousse avec une intensité et une durée données, et de mettre à jour les propriétés de la caméra (rotation, translation) à chaque image.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Camera</span> {
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>  Camera(sf<span style="color:#f92672">::</span>RenderWindow<span style="color:#f92672">*</span> window);
