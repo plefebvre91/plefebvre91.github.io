@@ -13,8 +13,8 @@
       <pubDate>Thu, 10 Mar 2022 14:44:50 +0100</pubDate>
       
       <guid>/code/camera-shake/</guid>
-      <description>Secousse de caméra avec SFML Dans cette présentation, Squirrel Eiserloh présente de façon générale comment ajouter des mouvements (translations fluides, secousses) à la caméra d&amp;rsquo;une scéne en deux ou trois dimensions. On se propose d&amp;rsquo;appliquer cela sur un exemple de scéne 2D écrite en C++ avec SFML : l&amp;rsquo;appui sur Espace déclenche une explosion qui fait vaciller la caméra.
-Le résultat final ressemble à ceci (la qualité est un peu dégradée par le format GIF):</description>
+      <description>Secousse de caméra avec SFML Dans cette présentation, Squirrel Eiserloh présente de façon générale comment ajouter des mouvements (translations fluides, secousses) à la caméra d&amp;rsquo;une scène en deux ou trois dimensions. On se propose d&amp;rsquo;appliquer cela sur un exemple de scène 2D écrite en C++ avec SFML : l&amp;rsquo;appui sur Espace déclenche une explosion qui fait vaciller la caméra.
+Le résultat final ressemble à ceci (la qualité est un peu dégradée par le format GIF) :</description>
     </item>
     
     <item>
