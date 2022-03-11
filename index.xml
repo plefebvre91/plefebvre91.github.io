@@ -196,8 +196,7 @@ Cours  [PDF] Introduction à Git  Autres  [PDF] Cache et alignement [PDF] Pipeli
       <pubDate>Sun, 03 Nov 2019 07:23:12 +0100</pubDate>
       
       <guid>/code/pixel/</guid>
-      <description>#Titre
-Pourquoi faire simple quand on peut faire compliqué ? Pour faire un article. Nous allons va voir ici au travers d&amp;rsquo;un exemple pourquoi le choix de la représentation d&amp;rsquo;une donnée, ici un pixel, peut influer sur les performances générales.
+      <description>Pourquoi faire simple quand on peut faire compliqué ? Pour faire un article. Nous allons va voir ici au travers d&amp;rsquo;un exemple pourquoi le choix de la représentation d&amp;rsquo;une donnée, ici un pixel, peut influer sur les performances générales.
 On se propose ici de parcourir différentes représentation d&amp;rsquo;une donnée destinée à contenir les composantes d&amp;rsquo;une couleur au format RGBA (tout ceci est évidemment applicable à d&amp;rsquo;autres formats). Il existe plusieurs façons de coder une couleur, on choisira celle utilisant 4 entiers compris entre 0 et 255 pour chaque composante : rouge, vert, bleu, et transparence.</description>
     </item>
     
