@@ -46,7 +46,7 @@ Méthode Avec un langage plus classique, pour dessiner ce genre de courbe la mé
       <guid>/code/quadtree/</guid>
       <description>Les quadtrees pour les collisions en 2D On se propose d&amp;rsquo;implémenter (C++ et SFML) une structure d&amp;rsquo;arbre quaternaire (quadtree) pour détecter les collisions d&amp;rsquo;un ensemble d&amp;rsquo;objets.
 Le résultat final ressemble à ça:
-Le code de ce qui est décrit ici est disponible sur le dépôt demo-quadtree-collision.
+Le code de ce qui est décrit ici est disponible sur le dépôt sfml-quadtree-collision.
 Contexte On considère un ensemble d&amp;rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets.</description>
     </item>
     

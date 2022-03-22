@@ -19,7 +19,7 @@
   <meta property="og:title" content="[C&#43;&#43;] Les quadtree pour les collisions 2D" />
 <meta property="og:description" content="Les quadtrees pour les collisions en 2D On se propose d&rsquo;implémenter (C&#43;&#43; et SFML) une structure d&rsquo;arbre quaternaire (quadtree) pour détecter les collisions d&rsquo;un ensemble d&rsquo;objets.
 Le résultat final ressemble à ça:
-Le code de ce qui est décrit ici est disponible sur le dépôt demo-quadtree-collision.
+Le code de ce qui est décrit ici est disponible sur le dépôt sfml-quadtree-collision.
 Contexte On considère un ensemble d&rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/code/quadtree/" /><meta property="article:section" content="code" />
@@ -31,7 +31,7 @@ Contexte On considère un ensemble d&rsquo;objets pouvant se déplacer, et on so
 <meta name="twitter:title" content="[C&#43;&#43;] Les quadtree pour les collisions 2D"/>
 <meta name="twitter:description" content="Les quadtrees pour les collisions en 2D On se propose d&rsquo;implémenter (C&#43;&#43; et SFML) une structure d&rsquo;arbre quaternaire (quadtree) pour détecter les collisions d&rsquo;un ensemble d&rsquo;objets.
 Le résultat final ressemble à ça:
-Le code de ce qui est décrit ici est disponible sur le dépôt demo-quadtree-collision.
+Le code de ce qui est décrit ici est disponible sur le dépôt sfml-quadtree-collision.
 Contexte On considère un ensemble d&rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets."/>
 
   
@@ -97,8 +97,8 @@ Contexte On considère un ensemble d&rsquo;objets pouvant se déplacer, et on so
     <h1 id="les-quadtrees-pour-les-collisions-en-2d">Les <em>quadtrees</em> pour les collisions en 2D</h1>
 <p>On se propose d&rsquo;implémenter (<em>C++</em> et <em>SFML</em>) une structure d&rsquo;arbre quaternaire (<em>quadtree</em>) pour détecter les collisions d&rsquo;un ensemble d&rsquo;objets.</p>
 <p>Le résultat final ressemble à ça:</p>
-<p><img src="https://github.com/plefebvre91/demo-quadtree-collision/raw/main/screenshot.png" alt="Screenshot"></p>
-<p>Le code de ce qui est décrit ici est disponible sur le dépôt <a href="https://github.com/plefebvre91/demo-quadtree-collision">demo-quadtree-collision</a>.</p>
+<p><img src="https://github.com/plefebvre91/sfml-quadtree-collision/raw/main/screenshot.png" alt="Screenshot"></p>
+<p>Le code de ce qui est décrit ici est disponible sur le dépôt <a href="https://github.com/plefebvre91/sfml-quadtree-collision">sfml-quadtree-collision</a>.</p>
 <h2 id="contexte">Contexte</h2>
 <p>On considère un ensemble d&rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets.</p>
 <h3 id="méthodes-naïves">Méthodes naïves</h3>
@@ -111,7 +111,7 @@ Contexte On considère un ensemble d&rsquo;objets pouvant se déplacer, et on so
 <p>Concrètement, l&rsquo;écran complet représente la racine de l&rsquo;arbre (il contient tous les objets). À cette racine on relie quatre nœuds, correspondants chacun à un des quarts de l&rsquo;écran, auquels on associe les objets de son parent. Pour raffiner la zone de recherche, on peut rediviser récursivement chacun des nœuds en quatre autre nœuds correspondant chacun à un seizième de l&rsquo;écran, puis un soixante-quatrième d&rsquo;écran, et ainsi de suite. À chaque itération on construit cet arbre en y plaçant chaque objet dans le bon nœud selon sa position. Un fois fait, chaque feuille de l&rsquo;arbre constitue une région plus ou moins grande dans laquelle se trouve quelques uns de nos objets, en nombre bien inférieur au nombre total, nous donnant ainsi un ensemble d&rsquo;objets à tester pour les collisions.</p>
 <p>Pour l&rsquo;exemple qui suit, les objets sont des cercles, chaque déplacement se fait en ligne droite selon un vecteur vitesse initial aléatoire, et les déplacements sont bornés aux dimensions de la fenêtre. La fonction qui teste la collision entre deux objets et la distance euclidienne élevée au carré (pour éviter la racine) entre les centres des objets.</p>
 <h2 id="implémentation-dun-arbre-quaternaire">Implémentation d&rsquo;un arbre quaternaire</h2>
-<p>Dans la suite on propose une implémentation d&rsquo;un arbre quaternaire. Seules les fonctions importantes sont exposées ici, pour plus de détails voir <a href="https://github.com/plefebvre91/demo-quadtree-collision">le code complet</a>.</p>
+<p>Dans la suite on propose une implémentation d&rsquo;un arbre quaternaire. Seules les fonctions importantes sont exposées ici, pour plus de détails voir <a href="https://github.com/plefebvre91/sfml-quadtree-collision">le code complet</a>.</p>
 <h3 id="les-nœuds">Les nœuds</h3>
 <p>Les informations contenues dans un nœud sont les suivantes:</p>
 <ul>
@@ -265,7 +265,7 @@ Contexte On considère un ensemble d&rsquo;objets pouvant se déplacer, et on so
 <p><img src="/img/quadtree-final.png" alt="Quadtree"></p>
 <h2 id="autres-ressources">Autres ressources</h2>
 <ul>
-<li><a href="https://github.com/plefebvre91/demo-quadtree-collision">Le code associé</a></li>
+<li><a href="https://github.com/plefebvre91/sfml-quadtree-collision">Le code associé</a></li>
 <li><a href="https://www.gamedev.net/tutorials/_/technical/graphics-programming-and-theory/quadtrees-r1303/">L&rsquo;article &ldquo;Quadtrees&rdquo; sur gamedev.net</a></li>
 <li><a href="https://stackoverflow.com/questions/41946007/efficient-and-well-explained-implementation-of-a-quadtree-for-2d-collision-det?utm_source=pocket_mylist">Stackoverflow</a></li>
 <li><a href="https://www.youtube.com/results?search_query=quadtree+collision+sfml">Autres exemples sur youtube</a></li>
