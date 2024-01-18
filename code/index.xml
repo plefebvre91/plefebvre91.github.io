@@ -6,169 +6,112 @@
     <description>Recent content in Codes on Pierre Lefebvre</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
-    <lastBuildDate>Thu, 10 Mar 2022 14:44:50 +0100</lastBuildDate><atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Mar 2022 14:44:50 +0100</lastBuildDate>
+    <atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[C&#43;&#43;] Mouvement de caméra SFML</title>
       <link>/code/camera-shake/</link>
       <pubDate>Thu, 10 Mar 2022 14:44:50 +0100</pubDate>
-      
       <guid>/code/camera-shake/</guid>
-      <description>Secousse de caméra avec SFML Dans cette présentation, Squirrel Eiserloh présente de façon générale comment ajouter des mouvements (translations fluides, secousses) à la caméra d&amp;rsquo;une scène en deux ou trois dimensions. On se propose d&amp;rsquo;appliquer cela sur un exemple de scène 2D écrite en C++ avec SFML : l&amp;rsquo;appui sur Espace déclenche une explosion qui fait vaciller la caméra.
-Le résultat final ressemble à ceci (la qualité est un peu dégradée par le format GIF) :</description>
+      <description>Secousse de caméra avec SFML Dans cette présentation, Squirrel Eiserloh présente de façon générale comment ajouter des mouvements (translations fluides, secousses) à la caméra d&amp;rsquo;une scène en deux ou trois dimensions. On se propose d&amp;rsquo;appliquer cela sur un exemple de scène 2D écrite en C++ avec SFML : l&amp;rsquo;appui sur Espace déclenche une explosion qui fait vaciller la caméra.&#xA;Le résultat final ressemble à ceci (la qualité est un peu dégradée par le format GIF) :</description>
     </item>
-    
     <item>
       <title>[GLSL] Électrocardiogramme</title>
       <link>/code/ecg/</link>
       <pubDate>Tue, 01 Mar 2022 20:43:14 +0100</pubDate>
-      
       <guid>/code/ecg/</guid>
-      <description>Dessiner un électrocardiogramme avec un shader On se propose de dessiner une courbe d&amp;rsquo;électrocardiogramme avec un shader (GLSL). Il s&amp;rsquo;agit d&amp;rsquo;une répresentation approximative, le but n&amp;rsquo;est pas de simuler quoique ce soit mais juste de manipuler un shader.
-Le code complet est disponible sur le dépôt et le résultat final ressemble à ça (la qualité est un peu dégradée par le format GIF):
-Méthode Avec un langage plus classique, pour dessiner ce genre de courbe la méthode suivie aurait probablement d&amp;rsquo;implémenter une application de type : $$f_t : \mathbb{R} \rightarrow \mathbb{R}$$</description>
+      <description>Dessiner un électrocardiogramme avec un shader On se propose de dessiner une courbe d&amp;rsquo;électrocardiogramme avec un shader (GLSL). Il s&amp;rsquo;agit d&amp;rsquo;une répresentation approximative, le but n&amp;rsquo;est pas de simuler quoique ce soit mais juste de manipuler un shader.&#xA;Le code complet est disponible sur le dépôt et le résultat final ressemble à ça (la qualité est un peu dégradée par le format GIF):&#xA;Méthode Avec un langage plus classique, pour dessiner ce genre de courbe la méthode suivie aurait probablement d&amp;rsquo;implémenter une application de type : $$f_t : \mathbb{R} \rightarrow \mathbb{R}$$</description>
     </item>
-    
     <item>
       <title>[Godot] Premier jeu</title>
       <link>/code/basket/</link>
       <pubDate>Fri, 25 Feb 2022 13:12:20 +0100</pubDate>
-      
       <guid>/code/basket/</guid>
-      <description>La boule de papier Description Premier essai de jeu (2D) avec Godot. Barre d&amp;rsquo;espace pour lancer la boule.
-🎮 Cliquez ici pour jouer</description>
+      <description>La boule de papier Description Premier essai de jeu (2D) avec Godot. Barre d&amp;rsquo;espace pour lancer la boule.&#xA;🎮 Cliquez ici pour jouer</description>
     </item>
-    
     <item>
       <title>[C&#43;&#43;] Les quadtree pour les collisions 2D</title>
       <link>/code/quadtree/</link>
       <pubDate>Sat, 19 Feb 2022 20:03:38 +0100</pubDate>
-      
       <guid>/code/quadtree/</guid>
-      <description>Les quadtrees pour les collisions en 2D On se propose d&amp;rsquo;implémenter (C++ et SFML) une structure d&amp;rsquo;arbre quaternaire (quadtree) pour détecter les collisions d&amp;rsquo;un ensemble d&amp;rsquo;objets.
-Le résultat final ressemble à ça:
-Le code de ce qui est décrit ici est disponible sur le dépôt sfml-quadtree-collision.
-Contexte On considère un ensemble d&amp;rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets.</description>
+      <description>Les quadtrees pour les collisions en 2D On se propose d&amp;rsquo;implémenter (C++ et SFML) une structure d&amp;rsquo;arbre quaternaire (quadtree) pour détecter les collisions d&amp;rsquo;un ensemble d&amp;rsquo;objets.&#xA;Le résultat final ressemble à ça:&#xA;Le code de ce qui est décrit ici est disponible sur le dépôt sfml-quadtree-collision.&#xA;Contexte On considère un ensemble d&amp;rsquo;objets pouvant se déplacer, et on souhaite pouvoir mettre à jour les leurs trajectoires en fonction des éventuelles collisions qui se produisent entre ces objets.</description>
     </item>
-    
     <item>
       <title>[C&#43;&#43;] Volley</title>
       <link>/code/volley/</link>
       <pubDate>Thu, 10 Feb 2022 14:00:20 +0100</pubDate>
-      
       <guid>/code/volley/</guid>
-      <description>Jeu de volley Description Jeu de volley en 2D réalisé en C++ avec SFML.
-Code Le code est ici : ici</description>
+      <description>Jeu de volley Description Jeu de volley en 2D réalisé en C++ avec SFML.&#xA;Code Le code est ici : ici</description>
     </item>
-    
     <item>
       <title>[CaML] Maillage</title>
       <link>/code/mesh/</link>
       <pubDate>Wed, 10 Nov 2021 13:56:20 +0100</pubDate>
-      
       <guid>/code/mesh/</guid>
-      <description>Maillage Description Programme permettant réaliser un maillage triangulaire d&amp;rsquo;une forme quelconque.
-Code Le code est ici : ici
-Résultat </description>
+      <description>Maillage Description Programme permettant réaliser un maillage triangulaire d&amp;rsquo;une forme quelconque.&#xA;Code Le code est ici : ici&#xA;Résultat </description>
     </item>
-    
     <item>
       <title>[CaML] Fractale de Von Koch</title>
       <link>/code/von-koch/</link>
       <pubDate>Tue, 09 Nov 2021 14:09:52 +0100</pubDate>
-      
       <guid>/code/von-koch/</guid>
-      <description>Fractale de Von Koch Description Programme permettant de tracer la fractale de Von Koch.
-Code Le code est ici : ici
-Résultat </description>
+      <description>Fractale de Von Koch Description Programme permettant de tracer la fractale de Von Koch.&#xA;Code Le code est ici : ici&#xA;Résultat </description>
     </item>
-    
     <item>
       <title>[CaML] Courbe polaire</title>
       <link>/code/polar/</link>
       <pubDate>Tue, 09 Nov 2021 12:36:14 +0100</pubDate>
-      
       <guid>/code/polar/</guid>
-      <description>Courbe polaire Description Programme permettant de tracer une courbe polaire à partir de son équation.
-Code Le code est ici : ici
-Résultat </description>
+      <description>Courbe polaire Description Programme permettant de tracer une courbe polaire à partir de son équation.&#xA;Code Le code est ici : ici&#xA;Résultat </description>
     </item>
-    
     <item>
       <title>[CaML] Fractale de Vicsek</title>
       <link>/code/vicsek/</link>
       <pubDate>Sun, 07 Nov 2021 13:25:07 +0100</pubDate>
-      
       <guid>/code/vicsek/</guid>
-      <description>Fractale de Vicsek Description  Le carré unité est décomposé en neuf sous-carreaux sur la grille régulière 3 par 3. Les carreaux dans les coins sont enlevés, les cinq autres restent. Ce procédé est récursivement répété pour les carreaux gardés. Wikipédia
- Code Le code est ici : ici
-Résultat </description>
+      <description>Fractale de Vicsek Description Le carré unité est décomposé en neuf sous-carreaux sur la grille régulière 3 par 3. Les carreaux dans les coins sont enlevés, les cinq autres restent. Ce procédé est récursivement répété pour les carreaux gardés. Wikipédia&#xA;Code Le code est ici : ici&#xA;Résultat </description>
     </item>
-    
     <item>
       <title>[CaML] Snake</title>
       <link>/code/snake/</link>
       <pubDate>Fri, 05 Nov 2021 13:10:43 +0100</pubDate>
-      
       <guid>/code/snake/</guid>
-      <description>Snake Description Jeu de Snake classique. Le serpent avance vers le curseur de la souris (pas besoin de cliquer).
-⚠️ Ne pas placer la souris derrière la tête dans la direction opposée du serpent.
-Code Le code est ici
-Résultat </description>
+      <description>Snake Description Jeu de Snake classique. Le serpent avance vers le curseur de la souris (pas besoin de cliquer).&#xA;⚠️ Ne pas placer la souris derrière la tête dans la direction opposée du serpent.&#xA;Code Le code est ici&#xA;Résultat </description>
     </item>
-    
     <item>
       <title>[CaML] Torus</title>
       <link>/code/torus/</link>
       <pubDate>Thu, 04 Nov 2021 17:25:07 +0100</pubDate>
-      
       <guid>/code/torus/</guid>
-      <description>Tore Description Code Le code est ici : ici
-Résultat </description>
+      <description>Tore Description Code Le code est ici : ici&#xA;Résultat </description>
     </item>
-    
     <item>
       <title>[CaML] Sphere</title>
       <link>/code/sphere/</link>
       <pubDate>Tue, 02 Nov 2021 17:27:43 +0100</pubDate>
-      
       <guid>/code/sphere/</guid>
-      <description>Sphère Description La sphère est générée de façon récursive en partant d&amp;rsquo;un tétraèdre de base, auquel on repousse du centre (via une normalisation des vecteurs correspondants) les médianes des triangles de chacune de ses faces.
-Le paramètre passé à la fonction de dessin correspond au nombre d&amp;rsquo;explosions à réaliser sur le premier solide. Sur l&amp;rsquo;illustration il vaut 5.
-Code Le code est ici
-Résultat </description>
+      <description>Sphère Description La sphère est générée de façon récursive en partant d&amp;rsquo;un tétraèdre de base, auquel on repousse du centre (via une normalisation des vecteurs correspondants) les médianes des triangles de chacune de ses faces.&#xA;Le paramètre passé à la fonction de dessin correspond au nombre d&amp;rsquo;explosions à réaliser sur le premier solide. Sur l&amp;rsquo;illustration il vaut 5.&#xA;Code Le code est ici&#xA;Résultat </description>
     </item>
-    
     <item>
       <title>[CaML] Triangle de Sierpinkski</title>
       <link>/code/sierpinkski-triangle/</link>
       <pubDate>Mon, 01 Nov 2021 17:24:51 +0100</pubDate>
-      
       <guid>/code/sierpinkski-triangle/</guid>
-      <description>Triangle de Sierpinski Description C&amp;rsquo;est une fractale générée à partir d&amp;rsquo;un triangle de base, qu&amp;rsquo;on divise en 3 triangles ayant 2 à 2 un sommet en commun et correspondant aux milieux des côtés du premier triangle.
-Dans le code, les triangles de plus petite taille sont ajoutés récursivement aux triangles existants. Le paramètre passé à la fonction de dessin correspond au nombre de division à effectuer. Sur l&amp;rsquo;illustration il vaut 6.</description>
+      <description>Triangle de Sierpinski Description C&amp;rsquo;est une fractale générée à partir d&amp;rsquo;un triangle de base, qu&amp;rsquo;on divise en 3 triangles ayant 2 à 2 un sommet en commun et correspondant aux milieux des côtés du premier triangle.&#xA;Dans le code, les triangles de plus petite taille sont ajoutés récursivement aux triangles existants. Le paramètre passé à la fonction de dessin correspond au nombre de division à effectuer. Sur l&amp;rsquo;illustration il vaut 6.</description>
     </item>
-    
     <item>
       <title>[CaML] Tapis de Sierpinski</title>
       <link>/code/sierpinkski-carpet/</link>
       <pubDate>Sun, 31 Oct 2021 17:24:55 +0100</pubDate>
-      
       <guid>/code/sierpinkski-carpet/</guid>
-      <description>Tapis de Sierpinski Description C&amp;rsquo;est une fractale générée à partir d&amp;rsquo;un carré de base, autour duquel on ajoute 8 carrés disposés sur les bords d&amp;rsquo;une grille de 3x3.
-Dans le code, les carrés de plus petite taille sont ajoutés récursivement aux carrés existants. Le paramètre passé à la fonction de dessin correspond au nombre de division à effectuer. Sur l&amp;rsquo;illustration il vaut 4.
-Code Le code est ici
-Résultat </description>
+      <description>Tapis de Sierpinski Description C&amp;rsquo;est une fractale générée à partir d&amp;rsquo;un carré de base, autour duquel on ajoute 8 carrés disposés sur les bords d&amp;rsquo;une grille de 3x3.&#xA;Dans le code, les carrés de plus petite taille sont ajoutés récursivement aux carrés existants. Le paramètre passé à la fonction de dessin correspond au nombre de division à effectuer. Sur l&amp;rsquo;illustration il vaut 4.&#xA;Code Le code est ici&#xA;Résultat </description>
     </item>
-    
     <item>
       <title>[C&#43;&#43;] 5 façons de coder un pixel</title>
       <link>/code/pixel/</link>
       <pubDate>Sun, 03 Nov 2019 07:23:12 +0100</pubDate>
-      
       <guid>/code/pixel/</guid>
-      <description>Pourquoi faire simple quand on peut faire compliqué ? Pour faire un article. Nous allons va voir ici au travers d&amp;rsquo;un exemple pourquoi le choix de la représentation d&amp;rsquo;une donnée, ici un pixel, peut influer sur les performances générales.
-On se propose ici de parcourir différentes représentation d&amp;rsquo;une donnée destinée à contenir les composantes d&amp;rsquo;une couleur au format RGBA (tout ceci est évidemment applicable à d&amp;rsquo;autres formats). Il existe plusieurs façons de coder une couleur, on choisira celle utilisant 4 entiers compris entre 0 et 255 pour chaque composante : rouge, vert, bleu, et transparence.</description>
+      <description>Pourquoi faire simple quand on peut faire compliqué ? Pour faire un article. Nous allons va voir ici au travers d&amp;rsquo;un exemple pourquoi le choix de la représentation d&amp;rsquo;une donnée, ici un pixel, peut influer sur les performances générales.&#xA;On se propose ici de parcourir différentes représentation d&amp;rsquo;une donnée destinée à contenir les composantes d&amp;rsquo;une couleur au format RGBA (tout ceci est évidemment applicable à d&amp;rsquo;autres formats). Il existe plusieurs façons de coder une couleur, on choisira celle utilisant 4 entiers compris entre 0 et 255 pour chaque composante : rouge, vert, bleu, et transparence.</description>
     </item>
-    
   </channel>
 </rss>
