@@ -107,6 +107,13 @@
       <description>Tapis de Sierpinski Description C&amp;rsquo;est une fractale générée à partir d&amp;rsquo;un carré de base, autour duquel on ajoute 8 carrés disposés sur les bords d&amp;rsquo;une grille de 3x3.&#xA;Dans le code, les carrés de plus petite taille sont ajoutés récursivement aux carrés existants. Le paramètre passé à la fonction de dessin correspond au nombre de division à effectuer. Sur l&amp;rsquo;illustration il vaut 4.&#xA;Code Le code est ici&#xA;Résultat </description>
     </item>
     <item>
+      <title>[CaML] Modélisation tumorale</title>
+      <link>/code/tumor/</link>
+      <pubDate>Fri, 12 Feb 2021 20:43:14 +0100</pubDate>
+      <guid>/code/tumor/</guid>
+      <description>Modélisation tumorale Ce travail avait été réalisé pendant mes études, où j&amp;rsquo;avais été suivi par Angélique Stéphanou, chargée de Recherche en biologie computationnelle au CNRS. Je n&amp;rsquo;ai produit que le code pour la simulation et la modéle du vaisseau.&#xA;Le but était de réaliser une modélisation de la croissance d&amp;rsquo;une tumeur cancéreuse. La première partie se concentre sur un modèle de croissance simple, sans vascularisation. La seconde y ajoute un facteur de croissance permettant la création d&amp;rsquo;un réseau vasculaire (angiogénèse) qui alimente la tumeur.</description>
+    </item>
+    <item>
       <title>[C&#43;&#43;] 5 façons de coder un pixel</title>
       <link>/code/pixel/</link>
       <pubDate>Sun, 03 Nov 2019 07:23:12 +0100</pubDate>
