@@ -6,8 +6,15 @@
     <description>Recent content on Pierre Lefebvre</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr-fr</language>
-    <lastBuildDate>Thu, 10 Mar 2022 14:44:50 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 21 Apr 2025 15:30:14 +0100</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[C&#43;&#43;] Mulithreading C&#43;&#43;20 : producteur-consommateur</title>
+      <link>/code/producer-consumer/</link>
+      <pubDate>Mon, 21 Apr 2025 15:30:14 +0100</pubDate>
+      <guid>/code/producer-consumer/</guid>
+      <description>Mulithreading C++20 : producteur-consommateur On propose une solution au problème du producteur-consommateur en C++.&#xA;Description Soit 2 processus cycliques appelés producteur et consommateur. À chacune de leur itération respective, le producteur génère une donnée, et le consommateur l&amp;rsquo;exploite. Les données produites ou consommées sont situées dans une zone mémoire partagée accessible aux 2 processus. Les 2 processus ne peuvent cependant pas travailler simultanément sur la même zone mémoire.&#xA;Rôle du producteur Le producteur remplit la zone tant qu&amp;rsquo;il y a de l&amp;rsquo;espace disponible.</description>
+    </item>
     <item>
       <title>[C&#43;&#43;] Mouvement de caméra SFML</title>
       <link>/code/camera-shake/</link>

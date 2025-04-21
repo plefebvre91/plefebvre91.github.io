@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> [C&#43;&#43;] Mulithreading C&#43;&#43;20 : producteur-consommateur | Pierre Lefebvre</title>
+  <link rel = 'canonical' href = '/code/producer-consumer/'>
+  <meta name="description" content="Ingénieur développement Web, Atos (Lyon).">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="[C&#43;&#43;] Mulithreading C&#43;&#43;20 : producteur-consommateur" />
+<meta property="og:description" content="Mulithreading C&#43;&#43;20 : producteur-consommateur On propose une solution au problème du producteur-consommateur en C&#43;&#43;.
+Description Soit 2 processus cycliques appelés producteur et consommateur. À chacune de leur itération respective, le producteur génère une donnée, et le consommateur l&rsquo;exploite. Les données produites ou consommées sont situées dans une zone mémoire partagée accessible aux 2 processus. Les 2 processus ne peuvent cependant pas travailler simultanément sur la même zone mémoire.
+Rôle du producteur Le producteur remplit la zone tant qu&rsquo;il y a de l&rsquo;espace disponible." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/code/producer-consumer/" /><meta property="article:section" content="code" />
+<meta property="article:published_time" content="2025-04-21T15:30:14+01:00" />
+<meta property="article:modified_time" content="2025-04-21T15:30:14+01:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="[C&#43;&#43;] Mulithreading C&#43;&#43;20 : producteur-consommateur"/>
+<meta name="twitter:description" content="Mulithreading C&#43;&#43;20 : producteur-consommateur On propose une solution au problème du producteur-consommateur en C&#43;&#43;.
+Description Soit 2 processus cycliques appelés producteur et consommateur. À chacune de leur itération respective, le producteur génère une donnée, et le consommateur l&rsquo;exploite. Les données produites ou consommées sont situées dans une zone mémoire partagée accessible aux 2 processus. Les 2 processus ne peuvent cependant pas travailler simultanément sur la même zone mémoire.
+Rôle du producteur Le producteur remplit la zone tant qu&rsquo;il y a de l&rsquo;espace disponible."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+    <header id="header">
+  <a href="/">
+  
+    <div id="logo" style="background-image: url(/images/logo.png)"></div>
+  
+  <div id="title">
+    <h1>Pierre Lefebvre</h1>
+  </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
+      </li>
+      
+        <li><a href="/">Accueil</a></li>
+      
+        <li><a href="/resources">Ressources</a></li>
+      
+        <li><a href="/code">Code</a></li>
+      
+        <li><a href="/post">Design</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+
+
+    
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <div class="content" itemprop="articleBody">
+  
+    <h1 id="mulithreading-c20--producteur-consommateur">Mulithreading C++20 : producteur-consommateur</h1>
+<p>On propose une solution au problème du producteur-consommateur en C++.</p>
+<h2 id="description">Description</h2>
+<p>Soit 2 processus cycliques appelés producteur et consommateur. À chacune de leur itération respective, le producteur génère une donnée, et le consommateur l&rsquo;exploite. Les données produites ou consommées sont situées dans une zone mémoire partagée accessible aux 2 processus. Les 2 processus ne peuvent cependant pas travailler simultanément sur la même zone mémoire.</p>
+<h3 id="rôle-du-producteur">Rôle du producteur</h3>
+<p>Le producteur remplit la zone tant qu&rsquo;il y a de l&rsquo;espace disponible. Il s&rsquo;arrête lorsque toute la zone est occupée, et reprend son activté lorsqu&rsquo;une place se libère.</p>
+<h3 id="rôle-du-consommateur">Rôle du consommateur</h3>
+<p>À l&rsquo;inverse le consommateur prélève les données de la zone partagée, jusqu&rsquo;à ce que celle-ci soit vide, auquel cas il s&rsquo;arrête jusqu&rsquo;à ce qu&rsquo;une donnée soit de nouveau disponible.</p>
+<h3 id="hypothèses">Hypothèses</h3>
+<p>On suppose que :</p>
+<ol>
+<li>la consommation se fait dans l&rsquo;ordre de la production;</li>
+<li>la zone partagée est de taille fixe;</li>
+<li>les vitesses des processus sont quelconques.</li>
+</ol>
+<h2 id="analyse">Analyse</h2>
+<h3 id="communication-inter-processus-sur-la-disponibilité-de-données">Communication inter-processus sur la disponibilité de données</h3>
+<p>Les processus doivent pouvoir se signaler entre eux de la possilité ou non de produire ou consommer les données.</p>
+<p>Dans les cas aux limites (la zone est soit pleine, soit vide), une fois que la zone a été remplie par le producteur, il ne pourra continuer que quand le consommateur lui aura signalé qu&rsquo;une place est de nouveau disponible. À l&rsquo;inverse, quand le consommateur aura consommé toutes les données, il ne pourra continuer que quand le producteur lui signalera qu&rsquo;une donnée est de nouveau disponible.</p>
+<p>Dans les cas intermédiaires (la zone n&rsquo;est ni pleine, ni vide), chacun peut réaliser son action.</p>
+<p>Ce mécanisme est réalisé à l&rsquo;aide de <a href="https://en.cppreference.com/w/cpp/thread/counting_semaphore">sémaphores</a>:</p>
+<ul>
+<li>un sémaphore de production (pour pouvoir remplir)</li>
+<li>un sémaphore de consommation (pour pouvoir lire)</li>
+</ul>
+<h3 id="section-critique">Section critique</h3>
+<p>Dans les cas où aucun des 2 processus n&rsquo;est stoppé par l&rsquo;autre (la zone n&rsquo;est ni pleine, ni vide), il faut assurer la cohérence des données décrivant la zone mémoire, en particulier la valeur indiquant le niveau de remplissage ou la taille actuelle. Cette valeur ne peut être modifiée que par un seul des 2 processus. Pour verrouiller sa modificiation on utilisera un <a href="https://en.cppreference.com/w/cpp/thread/mutex"><em>mutex</em></a>.</p>
+<h2 id="code">Code</h2>
+<h3 id="les-données-partagées">Les données partagées</h3>
+<p>On suppose que le buffer est initialisé vide. Les valeurs des sémaphores de production et consommation seront donc respectivement égales à la taille du buffer et à zéro.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// Fixed-size fuffer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">constexpr</span> <span style="color:#66d9ef">int</span> SIZE <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;
+</span></span><span style="display:flex;"><span>std<span style="color:#f92672">::</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, SIZE<span style="color:#f92672">&gt;</span> shared_buffer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Index of the last produced value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> current_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Mutex to protect current_index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>mutex buffer_mutex;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Initial value of production semphore is equal to the buffer size (empty at start)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>counting_semaphore<span style="color:#f92672">&lt;</span>SIZE<span style="color:#f92672">&gt;</span> sem_production{SIZE};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Initial value of consuming is 0 (nothing in the buffer)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>std<span style="color:#f92672">::</span>counting_semaphore<span style="color:#f92672">&lt;</span>SIZE<span style="color:#f92672">&gt;</span> sem_consumption{<span style="color:#ae81ff">0</span>};
+</span></span></code></pre></div><h3 id="le-producteur">Le producteur</h3>
+<p>Le producteur ne peut pas agir tant que le sémaphore indiquant la possibilté de produire ne peut peut être acquis. Une fois acquis, il ajoute une valeur au buffer (ici un nombre au hasard) et met à jour sa taille courante en prenant soin d&rsquo;obtenir un accès exclusif.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">producer</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> args) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span>(true) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Sleeps if it cannot produce
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sem_production.acquire();
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Lock and updates the buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      std<span style="color:#f92672">::</span>lock_guard<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>mutex<span style="color:#f92672">&gt;</span> lock(buffer_mutex);
+</span></span><span style="display:flex;"><span>      shared_buffer[current_index<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Wakes the consumer up
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sem_consumption.release();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Une fois fait, il incrémente la valeur du sémaphore de consommation pour signaler la possiblité de lire le buffer et ainsi débloquer le second processus.</p>
+<h3 id="le-consommateur">Le consommateur</h3>
+<p>Le comportement est symétrique par rapport au producteur. Il tente d&rsquo;acquérir le sémaphore de consommation (ou s&rsquo;endort sinon), réalise son action et incrémente le sémaphore de production.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">consumer</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> args) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span>(true) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Sleeps if it cannot consume
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sem_consumption.acquire();
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Locks and updates the buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      std<span style="color:#f92672">::</span>lock_guard<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>mutex<span style="color:#f92672">&gt;</span> lock(buffer_mutex);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">int</span> value <span style="color:#f92672">=</span> shared_buffer[<span style="color:#f92672">--</span>current_index];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// Do something with value... 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      (<span style="color:#66d9ef">void</span>) value;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Wakes the producer up
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sem_production.release();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="résultat">Résultat</h3>
+<p>Le code est disponible sur le <a href="https://github.com/plefebvre91/multithreading/blob/main/producer_consumer.cpp">dépôt Github</a></p>
+
+  
+  </div>
+</article>
+
+
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2025  Pierre Lefebvre 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Accueil</a></li>
+         
+        <li><a href="/resources">Ressources</a></li>
+         
+        <li><a href="/code">Code</a></li>
+         
+        <li><a href="/post">Design</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+  <script
+    type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+</html>
