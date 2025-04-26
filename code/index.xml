@@ -9,11 +9,25 @@
     <lastBuildDate>Mon, 21 Apr 2025 15:30:14 +0100</lastBuildDate>
     <atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>[C&#43;&#43;] Mulithreading C&#43;&#43;20 : lecteurs-rédacteur</title>
+      <link>/code/reader-writer/</link>
+      <pubDate>Mon, 21 Apr 2025 15:30:14 +0100</pubDate>
+      <guid>/code/reader-writer/</guid>
+      <description>Mulithreading C++20 : lecteurs-rédateur On propose une solution au problème des lecteurs-rédacteur en C++.&#xA;Description Là encore il s&amp;rsquo;agit d&amp;rsquo;un problème de partage de ressource entre 2 processus, mais cette fois-ci de manière non symétrique, puisque les processus auront des priorités différentes.&#xA;Rôle des rédacteurs Les rédacteurs doivent accéder à la ressource de manière exclusive et donc attendre si au moins un lecteur la possède.&#xA;Rôles des lecteurs Les lecteurs peuvent :</description>
+    </item>
+    <item>
       <title>[C&#43;&#43;] Mulithreading C&#43;&#43;20 : producteur-consommateur</title>
       <link>/code/producer-consumer/</link>
       <pubDate>Mon, 21 Apr 2025 15:30:14 +0100</pubDate>
       <guid>/code/producer-consumer/</guid>
       <description>Mulithreading C++20 : producteur-consommateur On propose une solution au problème du producteur-consommateur en C++.&#xA;Description Soit 2 processus cycliques appelés producteur et consommateur. À chacune de leur itération respective, le producteur génère une donnée, et le consommateur l&amp;rsquo;exploite. Les données produites ou consommées sont situées dans une zone mémoire partagée accessible aux 2 processus. Les 2 processus ne peuvent cependant pas travailler simultanément sur la même zone mémoire.&#xA;Rôle du producteur Le producteur remplit la zone tant qu&amp;rsquo;il y a de l&amp;rsquo;espace disponible.</description>
+    </item>
+    <item>
+      <title>[Java] Des raisons d&#39;utiliser l&#39;inférence de type</title>
+      <link>/code/var/</link>
+      <pubDate>Mon, 24 Jun 2024 07:19:36 +0100</pubDate>
+      <guid>/code/var/</guid>
+      <description>Des raisons d&amp;rsquo;utiliser l&amp;rsquo;inférence de type L&amp;rsquo;utilisation de l&amp;rsquo;inférence de type sur les variables locales en Java peut-être source de débat sur son bien-fondé au sein des pratiquant(e)s. Cet article ne se veut objectif, une des réponses les plus pertinentes sur Reddit.com à la question &amp;ldquo;Is using var okay?&amp;rdquo; étant :&#xA;Let&amp;rsquo;s have a 4 hour company wide meeting to discuss this.&#xA;Histoire En 2016 Brian Goetz propose via la JEP 286 (Java Enhancement Proposal) l&amp;rsquo;introduction d&amp;rsquo;un nouveau mot dans le standard, qui permet l&amp;rsquo;inférence de type de lors de la déclaration-initialisation de variables locales, comme on le trouve dans certains langages (auto en C++, var/let/const en Javascript).</description>
     </item>
     <item>
       <title>[C&#43;&#43;] Mouvement de caméra SFML</title>
